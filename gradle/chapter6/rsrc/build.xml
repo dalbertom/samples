@@ -1,0 +1,3 @@
+<project name="ant-properties">
+  <property name="prop1" value="value1"/>
+</project>
