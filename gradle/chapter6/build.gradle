@@ -53,3 +53,10 @@ task hello2 << {
 hello2.doLast {
   println "Greetings from the $hello2.name task."
 }
+
+task myTask {
+  ext.myProperty = "myValue"
+}
+task printTaskProperties << {
+  println myTask.myProperty
+}
