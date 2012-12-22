@@ -30,3 +30,19 @@ task taskY << {
   }
 }
 task0.dependsOn task2, task3
+
+hello << {
+  println 'Hello Earth'
+}
+
+hello.doFirst {
+  println 'Hello Venus'
+}
+
+hello.doLast {
+  println 'Hello Mars'
+}
+
+hello << {
+  println 'Hello Jupiter'
+}
