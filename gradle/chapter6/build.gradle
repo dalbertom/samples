@@ -15,3 +15,11 @@ task count << {
 task intro(dependsOn: hello) << {
   println "I'm Gradle"
 }
+
+task taskX(dependsOn: 'taskY') << {
+  println "taskX"
+}
+
+task taskY << {
+  println "taskY"
+}
