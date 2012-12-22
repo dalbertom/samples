@@ -23,3 +23,9 @@ task taskX(dependsOn: 'taskY') << {
 task taskY << {
   println "taskY"
 }
+
+4.times { counter ->
+  task "task$counter" << {
+    println "I'm task number $counter"
+  }
+}
