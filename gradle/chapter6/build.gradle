@@ -78,3 +78,14 @@ task checksum << {
 File[] fileList(String dir) {
   file(dir).listFiles({file -> file.isFile()} as FileFilter).sort()
 }
+
+defaultTasks 'clean', 'run'
+task clean << {
+  println 'Default cleaning!'
+}
+task run << {
+  println 'Default running!'
+}
+task other << {
+  println "I'm not a default task!"
+}
