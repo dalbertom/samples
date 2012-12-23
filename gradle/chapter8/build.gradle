@@ -3,6 +3,11 @@ apply plugin: 'java'
 repositories {
   mavenCentral()
 }
+// repositories {
+//   maven {
+//     url "http://repo.mycompany.com/maven2"
+//   }
+// }
 
 dependencies {
   compile 'org.hibernate:hibernate-core:3.6.7.Final'
