@@ -13,3 +13,8 @@ task test(dependsOn: [compile, compileTest]) << {
 task dist(dependsOn: [compile, test]) << {
   println 'building the distribution'
 }
+
+dist {
+  description = 'Builds the distribution'
+  group = 'build'
+}
