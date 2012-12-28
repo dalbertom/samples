@@ -28,3 +28,10 @@ task configure << {
   println pos.beginIndex
   println pos.endIndex
 }
+
+task configure2 << {
+  pos = new java.text.FieldPosition(10)
+  apply from: 'other2.gradle', to: pos
+  println pos.beginIndex
+  println pos.endIndex
+}
