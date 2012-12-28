@@ -23,3 +23,21 @@ tasks.add(name: 'copy3', type: Copy) {
   from(file('srcDir'))
   into(buildDir)
 }
+
+task hello5
+// Accessing tasks as properties
+println hello5.name
+println project.hello5.name
+
+// Accessing tasks via tasks collection
+println tasks.hello5.name
+println tasks['hello5'].name
+
+project(':projectA') {
+  task hello5
+}
+// Accessing tasks by path
+println tasks.getByPath('hello5').path
+println tasks.getByPath(':hello5').path
+println tasks.getByPath('projectA:hello5').path
+println tasks.getByPath(':projectA:hello5').path
