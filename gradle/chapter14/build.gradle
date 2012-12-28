@@ -17,3 +17,5 @@ task printProps << {
   println envProjectProp
   println System.properties['system']
 }
+
+apply from: 'other.gradle'
