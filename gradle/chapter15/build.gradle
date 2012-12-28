@@ -1,0 +1,25 @@
+task hello << {
+  println "hello"
+}
+task(hello2) << {
+  println "hello2"
+}
+task('hello3') << {
+  println "hello3"
+}
+tasks.add(name: 'hello4') << {
+  println "hello4"
+}
+
+task(copy, type: Copy) {
+  from(file('srcDir'))
+  into(buildDir)
+}
+task('copy2', type: Copy) {
+  from(file('srcDir'))
+  into(buildDir)
+}
+tasks.add(name: 'copy3', type: Copy) {
+  from(file('srcDir'))
+  into(buildDir)
+}
