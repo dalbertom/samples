@@ -66,3 +66,9 @@ myCopy4.configure {
   into('target')
   include('**/*.txt', '**/*.xml', '**/*.properties')
 }
+
+task myCopy5(type: Copy) {
+  from 'resources'
+  into 'target'
+  include '**/*.txt', '**/*.xml', '**/*.properties'
+}
