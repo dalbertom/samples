@@ -52,3 +52,10 @@ task(myCopy2, type: Copy)
   .from('resources')
   .into('target')
   .include('**/*.txt', '**/*.xml', '**/*.properties')
+
+task myCopy3(type: Copy)
+myCopy3 {
+  from 'resources'
+  into 'target'
+  include('**/*.txt', '**/*.xml', '**/*.properties')
+}
