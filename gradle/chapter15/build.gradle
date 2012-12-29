@@ -59,3 +59,10 @@ myCopy3 {
   into 'target'
   include('**/*.txt', '**/*.xml', '**/*.properties')
 }
+
+task myCopy4(type: Copy)
+myCopy4.configure {
+  from('source')
+  into('target')
+  include('**/*.txt', '**/*.xml', '**/*.properties')
+}
