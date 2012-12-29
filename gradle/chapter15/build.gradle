@@ -72,3 +72,13 @@ task myCopy5(type: Copy) {
   into 'target'
   include '**/*.txt', '**/*.xml', '**/*.properties'
 }
+
+task taskX(dependsOn: ':projectA:taskY') << {
+  println 'taskX'
+}
+
+project('projectA') {
+  task taskY << {
+    println 'taskY'
+  }
+}
