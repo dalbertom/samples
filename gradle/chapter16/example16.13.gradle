@@ -1,0 +1,9 @@
+// The copy() method is not incremental
+task copyMethod << {
+  copy {
+    from 'src/main/webapp'
+    into 'build/explodedWar'
+    include '**/*.html'
+    include '**/*.jsp'
+  }
+}

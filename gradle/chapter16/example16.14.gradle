@@ -1,0 +1,16 @@
+// The copy() method can not honor task dependencies when a task is
+// used as a copy source because it's a method and not a task. As such,
+// if you are using the copy() method as part of a task action, you must
+// explicitly declare all inputs and outputs in order to get the correct
+// behavior.
+task copyMethodWithExplicitDependencies {
+  inputs.file copyTask // up-to-date check for inputs, plus add copyTask as dependency
+  outputs.dir 'some-dir' // up-to-date check for outputs
+  doLast {
+    copy {
+      // Copy the output of copyTask
+      from copyTask
+      into 'some-dir'
+    }
+  }
+}

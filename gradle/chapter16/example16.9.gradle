@@ -1,0 +1,14 @@
+// Usually, there is a method with the same name as the property,
+// which appends to the set of files. Again, this method accepts
+// any of the types supported by the files() method.
+
+compile {
+  // Add some source directories use String paths
+  source 'src/main/java', 'src/main/groovy'
+
+  // Add a source directory using a File object
+  source file('../shared/java')
+
+  // Add some source directories using a closure
+  source { file('src/test/').listFiles() }
+}
