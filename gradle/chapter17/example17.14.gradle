@@ -1,0 +1,5 @@
+ant.importBuild 'example17.14.xml'
+
+ant.path(id: 'classpath', location: 'libs')
+ant.references.classpath = ant.path(location: 'libs')
+ant.references['classpath'] = ant.path(location: 'libs')

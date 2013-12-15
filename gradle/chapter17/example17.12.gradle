@@ -1,0 +1,6 @@
+ant.importBuild 'example17.12.xml'
+
+ant.buildDir = buildDir
+ant.properties.buildDir = buildDir
+ant.properties['buildDir'] = buildDir
+ant.property(name: 'buildDir', location: buildDir)

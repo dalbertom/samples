@@ -1,0 +1,5 @@
+ant.importBuild 'example17.10.xml'
+
+hello << {
+  println 'Hello, from Gradle'
+}

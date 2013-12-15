@@ -1,0 +1,3 @@
+<project>
+  <echo>buildDir = ${buildDir}</echo>
+</project>

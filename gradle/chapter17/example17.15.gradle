@@ -1,0 +1,3 @@
+ant.importBuild 'example17.15.xml'
+println ant.references.antPath
+println ant.references['antPath']
