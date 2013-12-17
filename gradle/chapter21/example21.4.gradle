@@ -1,0 +1,8 @@
+apply plugin: 'java'
+
+defaultTasks 'tasks', 'show'
+
+task show << {
+  println relativePath(compileJava.destinationDir)
+  println relativePath(processResources.destinationDir)
+}
