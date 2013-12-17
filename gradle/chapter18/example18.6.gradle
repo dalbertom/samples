@@ -1,0 +1,25 @@
+// gradle -I example18.6.gradle build
+
+/* can implement any of the following listener interfaces
+   * BuildListener
+   * ProjectEvaluationListener
+   * TaskExecutionGraphListener
+   * TaskExecutionListener
+   * TaskActionListener */
+
+useLogger(new CustomEventLogger())
+
+class CustomEventLogger extends BuildAdapter
+implements TaskExecutionListener {
+  public void beforeExecute(Task task) {
+    println "[$task.name]"
+  }
+
+  public void afterExecute(Task task, TaskState state) {
+    println()
+  }
+
+  public void buildFinished(BuildResult result) {
+    println 'build completed'
+  }
+}
