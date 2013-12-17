@@ -5,3 +5,4 @@ Gradle tutorial from http://gradle.org/docs/current/userguide/userguide.html
 * [Chapter 18. Logging](chapter18/README.md)
 * [Chapter 20. The Build Environment](chapter20/README.md)
 * [Chapter 21. Gradle Plugins](chapter21/README.md)
+* [Chapter 22. Standard Gradle plugins](http://www.gradle.org/docs/current/userguide/standard_plugins.html)
