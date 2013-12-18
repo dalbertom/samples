@@ -1,0 +1,8 @@
+apply plugin: 'java'
+
+test {
+  useTestNG {
+    excludeGroups 'integrationTests'
+    includeGroups 'unitTests'
+  }
+}

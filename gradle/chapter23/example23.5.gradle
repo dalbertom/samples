@@ -1,0 +1,9 @@
+apply plugin: 'java'
+
+println sourceSets
+
+sourceSets {
+  intTest
+}
+
+println sourceSets

@@ -1,0 +1,34 @@
+apply plugin: 'java'
+
+test {
+  filter {
+    // include specific method in any of the tests
+    includeTestsMatchinv "*UiCheck"
+
+    // include all tests from package
+    includeTestsMatching "org.gradle.internal.*"
+
+    // include all integrationTests
+    includeTestsMatching "*IntegTest"
+  }
+}
+
+// Some examples of using the command line option:
+// gradle test --tests org.gradle.SomeTest.someSpecificFeature
+// gradle test --tests SomeTest.someSpecificFeature
+// gradle test --tests SomeSpecificTest
+// gradle test --tests all.in.specific.package*
+// gradle test --tests *IntegTest
+// gradle test --tests *IntegTest*ui*
+// gradle someTestTask --tests *UiTest someOtherTestTask --tests *WebTest*ui
+
+// System Properties
+// taskName.single=testNamePatter
+// gradle -Dtest.single=ThisUniquelyNamedTest test
+// gradle -Dtest.single=a/b/ test
+// gradle -DintegTest.single=IntegrationTest integTest
+// gradle -Dtest.single=:proj1:test:Customer build
+// gradle -DintegTest.single=c/d/ :proj1:integTest
+
+// Suspended debug on port 5005
+// gradle test -Dtest.single=ThisUniquelyNamedTest -Dtest.debug

@@ -1,0 +1,9 @@
+apply plugin: 'java'
+
+sourceSets {
+  intTest
+}
+
+task intTestJar(type: Jar) {
+  from sourceSets.intTest.output
+}

@@ -1,0 +1,19 @@
+apply plugin: 'java'
+
+sourceSets {
+  main {
+    java {
+      srcDir 'src/java'
+    }
+    resources {
+      srcDir 'src/resources'
+    }
+  }
+}
+
+sourceSets.main.java.srcDir 'source/java'
+
+sourceSets.main.java.srcDirs.each {
+  println relativePath(it)
+}
+

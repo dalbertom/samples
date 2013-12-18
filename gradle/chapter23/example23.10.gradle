@@ -1,0 +1,11 @@
+apply plugin: 'java'
+
+sourceSets {
+  intTest
+}
+
+task intTest(type: Test) {
+  testClassesDir = sourceSets.intTest.output.classesDir
+  classpath = sourceSets.intTest.runtimeClasspath
+}
+

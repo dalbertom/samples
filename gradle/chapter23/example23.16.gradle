@@ -1,0 +1,10 @@
+apply plugin: 'java'
+
+ext.sharedManifest = manifest {
+  attributes("Implementation-Title": "Gradle", "Implementation-Version": version)
+}
+task fooJar(type: Jar) {
+  manifest = project.manifest {
+    from sharedManifest
+  }
+}

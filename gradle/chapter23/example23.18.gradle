@@ -1,0 +1,3 @@
+apply plugin: 'java'
+
+jar.manifest.writeTo("$buildDir/mymanifest.mf")

@@ -1,0 +1,19 @@
+apply plugin: 'java'
+
+// Varius ways to access the main source set
+
+println sourceSets.main.output.classesDir
+println sourceSets['main'].output.classesDir
+sourceSets {
+  println main.output.classesDir
+}
+sourceSets {
+  main {
+    println output.classesDir
+  }
+}
+
+// Iterate over the source sets
+sourceSets.all {
+  println name
+}
