@@ -8,3 +8,4 @@ Gradle tutorial from http://gradle.org/docs/current/userguide/userguide.html
 * [Chapter 22. Standard Gradle plugins](http://www.gradle.org/docs/current/userguide/standard_plugins.html)
 * [Chapter 23. The Java Plugin](chapter23/README.md)
 * [Chapter 50. Dependency Management](chapter50/README.md)
+* [Chapter 52. The Maven Plugin](http://www.gradle.org/docs/current/userguide/maven_plugin.html)
