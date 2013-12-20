@@ -1,0 +1,9 @@
+repositories {
+  ivy {
+    url 'http://repo.mycompany.com'
+    credentials {
+      username 'user'
+      password 'password'
+    }
+  }
+}

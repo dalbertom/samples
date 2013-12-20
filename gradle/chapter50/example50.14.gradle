@@ -1,0 +1,10 @@
+configurations {
+  compile.exclude module: 'commons'
+  all*.exclude group: 'org.gradle.test.excludes', module: 'reports'
+}
+
+dependencies {
+  compile("org.gradle.test.excludes:api:1.0") {
+    exclude module: 'shared'
+  }
+}

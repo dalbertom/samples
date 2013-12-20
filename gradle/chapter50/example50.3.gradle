@@ -1,0 +1,20 @@
+configurations {
+  compile {
+    description = 'compile classpath'
+    transitive = true
+  }
+  runtime {
+    extendsFrom compile
+  }
+}
+configurations.compile {
+  description = 'compile classpath'
+}
+
+configurations.each {
+  println it.name
+  println it.description
+  println it.transitive
+  println it.extendsFrom
+  println()
+}

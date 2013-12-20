@@ -1,0 +1,2 @@
+compile "org.gradle.test.classifiers:services:1.0:jdk15@jar"
+  otherConf group: 'org.gradle.test.classifiers', name: 'service', version: '1.0', classifier: 'jdk14'

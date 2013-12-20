@@ -1,0 +1,7 @@
+configurations.all {
+  resolutoinStrategy.eachDependency { DependencyResolveDetails details ->
+    if (details.requested.group == 'org.gradle') {
+      details.useVersion '1.4'
+    }
+  }
+}

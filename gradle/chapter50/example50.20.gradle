@@ -1,0 +1,14 @@
+apply from: 'example50.19.gradle'
+
+defaultTasks = ['dependencies']
+
+task dependencies << {
+  configurations.alllife.dependencies.each { dep -> println dep.name }
+  println()
+  configurations.alllife.allDependencies.each { dep -> println dep.name }
+  println()
+  configurations.alllife.allDependencies.findAll { dep -> dep.name != 'orca' }.each { dep -> println dep.name }
+}
+
+// dependencies returns only the dependencies belonging explicitly to the configuration.
+// allDependencies includes the dependencies from extended configurations

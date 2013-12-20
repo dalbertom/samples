@@ -1,0 +1,20 @@
+repositories {
+  flatDir {
+    name 'localRepository'
+  }
+}
+repositories {
+  localRepository {
+    dirs 'lib'
+  }
+}
+repositories.localRepository {
+  dirs 'lib2'
+}
+
+println repositories.localRepository.name
+println repositories['localRepository'].dirs
+
+repositories.localRepository.dirs = ['lib3']
+
+println repositories['localRepository'].dirs

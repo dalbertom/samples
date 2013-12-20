@@ -1,0 +1,13 @@
+apply from: 'example50.19.gradle'
+
+defaultTasks 'copyVsFiles'
+
+task copyVsFiles << {
+  configurations.sealife.copyRecursive { dep -> dep.name == 'orca' }.each { file ->
+    println file.name
+  }
+  println()
+  configurations.sealife.files { dep-> dep.name == 'orca' }.each { file ->
+    println file.name
+  }
+}

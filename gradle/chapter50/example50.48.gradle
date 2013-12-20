@@ -1,0 +1,3 @@
+configurations.all {
+  resolutionStrategy.cacheChangingModulesFor 4, 'hours'
+}

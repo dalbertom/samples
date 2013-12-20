@@ -1,0 +1,14 @@
+configurations {
+  runtime
+}
+
+dependencies {
+  runtime module("org.codehauls.groovy:groovy-all:2.2.0") {
+    dependency("commons-cli:commons-cli:1.0") {
+      transitive = false
+    }
+    module(group: 'org.apache.ant', name: 'ant', version: '1.8.4') {
+      dependencies "org.apache.ant:ant-launcher:1.8.4@jar", "org.apache.ant:ant-junit:1.8.4"
+    }
+  }
+}

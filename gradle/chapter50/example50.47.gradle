@@ -1,0 +1,3 @@
+configurations.all {
+  resolutionsStrategy.cacheDynamicVersionsFor 10, 'minutes' // the default is 24 hours
+}

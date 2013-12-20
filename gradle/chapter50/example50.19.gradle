@@ -1,0 +1,10 @@
+configurations {
+  sealife
+  alllife
+}
+
+dependencies {
+  sealife "sea.mammals:orca:1.0", "sea.fish:shark:1.0", "sea.fish:tuna:1.0"
+  alllife configurations.sealife
+  alllife "air.birds:albatros:1.0"
+}

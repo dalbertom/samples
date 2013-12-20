@@ -1,0 +1,12 @@
+configurations.all {
+  resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+    if (details.requested.name == 'groovy-all') {
+      // prefer 'groovy' over 'groovy-all'
+      details.useTarget group: details.requested.group, name: 'groovy', version: details.requested.version
+    }
+    if (details.requested.name == 'log4j') {
+      // prefer 'log4j-over-slf4j' over 'log4j', with fixed version:
+      details.useTarget "org.slf4j:log4j-over-slf4j:1.7.5"
+    }
+  }
+}

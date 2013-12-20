@@ -1,0 +1,13 @@
+apply from: 'example50.19.gradle'
+
+defaultTasks 'copy'
+
+task copy << {
+  configurations.alllife.copyRecursive { dep -> dep.name != 'orca' }.allDependencies.each { dep ->
+    println dep.name
+  }
+  println()
+  configurations.alllife.copy().allDependencies.each { dep ->
+    println dep.name
+  }
+}

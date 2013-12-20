@@ -1,0 +1,16 @@
+repositories {
+  mavenCentral()
+}
+
+configurations {
+  compile
+}
+
+dependencies {
+  compile "org.codehaus.groovy:groovy-all:2.2.0@jar"
+  compile "commons-cli:commons-cli:1.0@jar"
+}
+
+task listJars << {
+  configurations.compile.each { File file -> println file.name }
+}

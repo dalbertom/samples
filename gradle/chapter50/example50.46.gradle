@@ -1,0 +1,16 @@
+dependencies {
+  config3 "air.birds:albatros:latest.silver"
+  components {
+    eachComponent { ComponentMetadataDetails details ->
+      if (details.id.group == "air.birds") {
+        details.statusScheme = ["bronze", "silver", "gold", "platinum"]
+      }
+    }
+  }
+}
+
+defaultTasks 'listBirds'
+
+task listBirds << {
+  configurations.config3.each { println it.name }
+}

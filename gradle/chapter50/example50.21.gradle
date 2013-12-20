@@ -1,0 +1,9 @@
+apply from: 'example50.19.gradle'
+
+defaultTasks 'allFiles'
+
+task allFiles << {
+  configurations.sealife.files.each { file ->
+    println file.name
+  }
+}

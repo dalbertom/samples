@@ -1,0 +1,4 @@
+dependencies {
+  runtime "org.groovy:groovy:2.2.0@jar"
+  runtime group: 'org.groovy', name: 'groovy', version: '2.2.0', ext: 'jar'
+}

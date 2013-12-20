@@ -1,0 +1,6 @@
+repositories {
+  ivy {
+    ivyPattern "$projectDir/repo/[organisation]/[module]-ivy-[revision].xml"
+    artifactPattern "$projectDir/repo/[organisation]/[module]-[revision](-[classifier]).[ext]"
+  }
+}

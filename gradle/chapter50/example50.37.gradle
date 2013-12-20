@@ -1,0 +1,2 @@
+println repositories.localRepository.name
+println repositories['localRepository'].name

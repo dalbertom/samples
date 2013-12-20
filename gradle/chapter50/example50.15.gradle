@@ -1,0 +1,4 @@
+dependencies {
+  runtime ":junit:4.10", ":testing"
+  runtime name: 'testing'
+}

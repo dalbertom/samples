@@ -1,0 +1,4 @@
+dependencies {
+  runtime files('libs/a.jar', 'libs/b.jar')
+  runtime fileTree(dir: 'libs', include: '*.jar')
+}

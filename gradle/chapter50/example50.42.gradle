@@ -1,0 +1,10 @@
+configurations.all {
+  resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+    if (details.requested.group == 'org.software'
+    && details.requested.name == 'some-library'
+    && details.requested.version == '1.2') {
+      // prefer different version which contains some necessary fixes
+      details.useVersion '1.2.1'
+    }
+  }
+}
