@@ -1,0 +1,4 @@
+include ':projectA'
+rootProject.name = 'main'
+project(':projectA').projectDir = new File(settingsDir, "a")
+project(':projectA').buildFileName = 'projectA.gradle'

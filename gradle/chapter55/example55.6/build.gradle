@@ -1,0 +1,12 @@
+allprojects {
+  afterEvaluate { project ->
+    if (project.hasTests) {
+      println "Adding test task to $project"
+      project.task('test') << {
+        println "Running tests for $project"
+      }
+    }
+  }
+}
+
+ext.hasTests = false

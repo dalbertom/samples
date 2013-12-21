@@ -1,0 +1,2 @@
+println rootProject.name
+println project(':projectA').name
