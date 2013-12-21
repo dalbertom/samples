@@ -10,3 +10,4 @@ Gradle tutorial from http://gradle.org/docs/current/userguide/userguide.html
 * [Chapter 50. Dependency Management](chapter50/README.md)
 * [Chapter 52. The Maven Plugin](http://www.gradle.org/docs/current/userguide/maven_plugin.html)
 * [Chapter 55. The Build Lifecycle](chapter55/README.md)
+* [Chapter 56. Multi-project Builds](chapter56/README.md)

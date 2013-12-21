@@ -1,0 +1,4 @@
+task action << {
+  println "Producing message:"
+  rootProject.ext.producerMessage = 'Watch the order of execution.'
+}

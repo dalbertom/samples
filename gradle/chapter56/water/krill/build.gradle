@@ -1,0 +1,5 @@
+ext.arctic = true
+
+task distanceToIceberg << {
+  println '5 nautical miles'
+}

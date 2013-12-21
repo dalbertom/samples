@@ -1,0 +1,8 @@
+evaluationDependsOn(':producer')
+defaultTasks 'consume'
+
+ext.message = rootProject.producerMessage
+
+task consume << {
+  println "Consuming message: " + message
+}

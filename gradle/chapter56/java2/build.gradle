@@ -1,0 +1,43 @@
+subprojects {
+  apply plugin: 'java'
+  group = 'org.gradle.sample'
+  version = '1.0'
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    testCompile "junit:junit:4.11"
+  }
+}
+
+// create an additional library containing only the
+// interfaces of the api project. We assign this library
+// to a new dependency configuration
+project(':api') {
+  configurations {
+    spi
+  }
+  dependencies {
+    compile project(':shared')
+  }
+  task spiJar(type: Jar) {
+    baseName = 'api-spi'
+    dependsOn classes
+    from sourceSets.main.output
+    include('org/gradle/sample/api/**')
+  }
+  artifacts {
+    spi spiJar
+  }
+}
+
+// For the person service we declare that the project
+// should be compile against the api interfaces but tested
+// with all classes from api
+project(':services:personService') {
+  dependencies {
+    compile project(':shared')
+    compile project(path: ':api', configuration: 'spi')
+    testCompile "junit:junit:4.11", project(':api')
+  }
+}
