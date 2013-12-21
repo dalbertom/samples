@@ -14,3 +14,4 @@ Gradle tutorial from http://gradle.org/docs/current/userguide/userguide.html
 * [Chapter 57. Writing Custom Task Classes](http://www.gradle.org/docs/current/userguide/custom_tasks.html)
 * [Chapter 58. Writing Custom Plugins](http://www.gradle.org/docs/current/userguide/custom_plugins.html)
 * [Chapter 59. Organizing Build Logic](chapter59/README.md)
+* [Chapter 60. Initialization Scripts](chapter60/README.md)
