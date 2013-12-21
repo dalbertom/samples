@@ -1,0 +1,12 @@
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  testCompile 'junit:junit:4.11'
+}
+
+// Adding subprojects to the root buildSrc project
+rootProject.dependencies {
+  runtime project(path)
+}
