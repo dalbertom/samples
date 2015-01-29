@@ -40,5 +40,9 @@
             "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
             "initrd=/install/initrd.gz -- <enter>"
         ]
+    }],
+    "post-processors": [{
+      "type": "vagrant",
+      "only": ["virtualbox-iso"]
     }]
 }
