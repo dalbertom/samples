@@ -13,6 +13,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.hostname = "virtualmachine"
 
+  config.vm.provision "shell", inline: $rootscript
+  config.vm.provision "shell", inline: $userscript, privileged: false
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -121,3 +123,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   #   chef.validation_client_name = "ORGNAME-validator"
 end
+
+$rootscript = <<SCRIPT
+apt-get update
+# Basic Tools
+apt-get install -y git screen tmux curl rlwrap
+# Dev Tools
+apt-get install -y openjdk-7-jdk ant maven
+apt-get install -y gradle docker.io
+SCRIPT
+
+$userscript = <<SCRIPT
+cat >> ~/.bashrc <<EOF
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+export M2_HOME=/usr/share/maven
+EOF
+SCRIPT
