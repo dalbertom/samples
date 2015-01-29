@@ -1,0 +1,21 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.define "web" do |web|
+    web.vm.box = "ubuntu/trusty64"
+    web.vm.hostname = "web"
+  end
+
+  config.vm.define "db" do |db|
+    db.vm.box = "ubuntu/trusty64"
+    db.vm.hostname = "db"
+  end
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "512"]
+  end
+end
