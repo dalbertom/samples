@@ -1,0 +1,41 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.hostname = "lvm"
+  config.ssh.forward_agent = true
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.gui = false
+    vb.memory = "1024"
+    for i in 1..3
+      disk = "disk#{i}.vdi"
+      unless File.exist?(disk)
+        vb.customize ['createhd',
+                      '--filename', disk,
+                      '--size', 2 * 1024]
+      end
+      vb.customize ['storageattach', :id,
+                    '--storagectl', 'SATAController',
+                    '--port', i,
+                    '--device', 0,
+                    '--type', 'hdd',
+                    '--medium', disk]
+    end
+  end
+
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get update
+    apt-get install -y lvm2
+
+    pvcreate /dev/sdb
+    pvcreate /dev/sdc
+    vgcreate work /dev/sdb /dev/sdc
+    lvcreate -L 3G -n repo work
+    mkfs.ext4 /dev/work/repo
+
+    mount /dev/work/repo /mnt
+    chown -R vagrant:vagrant /mnt
+  SHELL
+end
