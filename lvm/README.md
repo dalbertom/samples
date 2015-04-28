@@ -29,3 +29,27 @@ After creating the logical volumes, they can be used as block devices. To be abl
 mkfs.ext4 /dev/my_volume_group/3gig
 mount -t ext4 /dev/my_volume_group/3gig /mnt
 ```
+
+## Other: Loopback filesystem
+```
+dd if=/dev/zero of=/mnt/loopback.img bs=1M count=10000
+mkfs.ext4 /mnt/loopback.img
+mkdir /mnt/loopback
+mount -o loop /mnt/loopback.img /mnt/loopback
+umount /mnt/loopback
+losetup /dev/loop2 /mnt/loopback.img
+pvscan
+vgscan
+vgextend work /dev/loop2
+lvextend /dev/work/repo /dev/loop2
+resize2fs /dev/work/repo
+```
+
+Save as `/etc/init/losetup.conf`
+```
+description     “Setup loop devices after filesystems are mounted”
+
+start on mounted MOUNTPOINT=/
+task
+exec losetup /dev/loop2 /mnt/loopback.img
+```
