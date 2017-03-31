@@ -1,7 +1,6 @@
 .vagrant/
 hostpath
 *.vdi
-
 .DS_Store
 .fseventsd/
 *.swp
