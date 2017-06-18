@@ -1,6 +1,29 @@
 group='org.example'
 version='1.0'
 
+allprojects {
+  repositories {
+    mavenLocal()
+    maven {
+      url 'http://localhost:8082/nexus/content/groups/public'
+      credentials {
+        username 'admin'
+        password 'admin123'
+      }
+    }
+  }
+
+  configurations.all {
+    resolutionStrategy {
+      //failOnVersionConflict()
+      //preferProjectModules()
+      dependencySubstitution {
+        substitute module('org.example:A:1.0') with project(':A')
+      }
+    }
+  }
+}
+
 subprojects {
   apply plugin: 'java'
   apply plugin: 'application'

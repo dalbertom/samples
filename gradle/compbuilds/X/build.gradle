@@ -1,6 +1,19 @@
 group='org.example'
 version='1.0'
 
+allprojects {
+  repositories {
+    mavenLocal()
+    maven {
+      url 'http://localhost:8082/nexus/content/groups/public'
+      credentials {
+        username 'admin'
+        password 'admin123'
+      }
+    }
+  }
+}
+
 subprojects {
   apply plugin: 'java'
   apply plugin: 'application'
@@ -8,7 +21,7 @@ subprojects {
 
 project('Y') {
   dependencies {
-    //compile project(':A')
+    compile 'org.example:A:1.0'
   }
 
   run {
