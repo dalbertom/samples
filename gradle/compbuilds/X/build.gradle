@@ -7,6 +7,10 @@ subprojects {
 }
 
 project('Y') {
+  dependencies {
+    compile project(':A')
+  }
+
   run {
     mainClassName = 'MainY'
   }
