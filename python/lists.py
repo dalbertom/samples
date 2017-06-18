@@ -1,3 +1,4 @@
+# strings.py
 squares = [1, 4, 9, 16, 25]
 print(squares)
 print(squares[0])
@@ -16,3 +17,5 @@ letters[:] = [] # clear list
 letters = ['a', 'b', 'c', 'd']
 length = len(letters) # length = 4
 print(length)
+
+# fibonacci.py
