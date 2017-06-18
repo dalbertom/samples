@@ -1,3 +1,7 @@
 include 'A', 'B'
-include 'X:Y', 'X:Z'
 
+includeBuild('X') {
+  dependencySubstitution {
+    substitute module("org.example:Y:1.0") with project(':Y')
+  }
+}

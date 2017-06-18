@@ -15,9 +15,14 @@ project(':A') {
 project(':B') {
   dependencies {
     compile project(':A')
+    compile 'org.example:Y:1.0'
   }
 
   run {
     mainClassName = 'MainB'
   }
+}
+
+task run {
+  dependsOn gradle.includedBuild('X').task(':Y:run')
 }
