@@ -33,7 +33,7 @@ task integTest {
 
 task funcTest {
    dependsOn startWebServer
-   mustRunAfter integTest
+   mustRunAfter unitTest, integTest
    finalizedBy stopWebServer
 }
 
