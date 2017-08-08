@@ -38,6 +38,11 @@ task funcTest {
 }
 
 task allTests {
-   dependsOn unitTest, integTest, funcTest
+  tasks.each { t ->
+    if (t.name.endsWith('Test')) {
+      dependsOn t
+    }
+  }
+   //dependsOn unitTest, integTest, funcTest
 }
 // gradle --console=plain allTests
