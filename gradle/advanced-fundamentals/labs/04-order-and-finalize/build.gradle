@@ -22,20 +22,24 @@ task unitTest {
     
 }
 
-task integTest {
+def usesWebServer = {
    dependsOn startWebServer
-   mustRunAfter unitTest
    finalizedBy stopWebServer
+}
+
+task integTest {
+   mustRunAfter unitTest
    doLast {
     //throw new GradleException("make it fail") // stopWebServer would still be invoked
    }
 }
 
 task funcTest {
-   dependsOn startWebServer
    mustRunAfter unitTest, integTest
-   finalizedBy stopWebServer
 }
+
+integTest usesWebServer
+funcTest usesWebServer
 
 task allTests {
   dependsOn tasks.matching { task -> task.name.endsWith('Test') }
