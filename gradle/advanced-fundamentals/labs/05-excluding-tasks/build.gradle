@@ -26,3 +26,10 @@ if (hasProperty('releaseManager')) { // call with -PreleaseManager
     }
   }
 }
+
+task upload2 {
+  onlyIf { hasProperty('releaseManager') }
+  doLast {
+    println "upload2"
+  }
+}
