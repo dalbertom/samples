@@ -16,3 +16,4 @@ task assemble
 task build { dependsOn test, assemble }
 
 // gradle --console=plain build
+// gradle --console=plain build -x test
