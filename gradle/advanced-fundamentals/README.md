@@ -56,3 +56,5 @@ if (isReleaseManagerUser()) {
   }
 }
 ```
+
+can use export TERM=dumb instead of --console=plain
