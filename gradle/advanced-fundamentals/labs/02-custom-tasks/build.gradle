@@ -15,19 +15,19 @@ class Greeting extends DefaultTask {
   //@Input
   def greeting = "world"
 
+  /* // It is preferred to use the @TaskAction annotation
   Greeting() {
     greeting = "there"
     doLast {
       println "Hello $greeting"
     }
   }
+  */
 
-  /*
   @TaskAction
   void greet() {
     println "Hello $greeting"
   }
-  */
 }
 
 task greeting1(type: Greeting)
