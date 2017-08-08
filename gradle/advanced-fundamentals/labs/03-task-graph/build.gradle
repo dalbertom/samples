@@ -14,7 +14,7 @@ task hello {
 }
 
 task date {
-    dependsOn hello
+    dependsOn hello, 'setup'
     doLast {
         println new Date()
     }
@@ -22,3 +22,10 @@ task date {
 
 task moreGreetings(dependsOn: hello)
 // gradle dateMoreGreetings
+
+task setup {
+  doLast {
+    println "setup"
+  }
+}
+// gradle date
