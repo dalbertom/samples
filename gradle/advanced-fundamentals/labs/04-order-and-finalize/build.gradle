@@ -23,11 +23,11 @@ task unitTest {
 }
 
 task integTest {
-    
+   mustRunAfter unitTest
 }
 
 task funcTest {
-    
+   mustRunAfter integTest
 }
 
 task allTests {
