@@ -41,3 +41,18 @@ task integrationTests {
   finalizedBy stopWebServer // it's often used for releasing resources, like Java's try-finally block
 }
 ```
+
+## Lab 5 excluding tasks
+* gradle taskA -x taskB // exclude at invocation time. Will exclude taskB and its dependencies
+* gradle.startParameter.excludedTaskNames.add "jar" // not very common
+* task.onlyIf { condition } // exclude at runtime
+* exclude them at configuration time:
+```
+if (isReleaseManagerUser()) {
+  task ftpDistribution {
+    doLast {
+      // do something
+    }
+  }
+}
+```
