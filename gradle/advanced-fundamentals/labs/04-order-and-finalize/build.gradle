@@ -27,7 +27,7 @@ task integTest {
    mustRunAfter unitTest
    finalizedBy stopWebServer
    doLast {
-    throw new GradleException("make it fail")
+    //throw new GradleException("make it fail") // stopWebServer would still be invoked
    }
 }
 
