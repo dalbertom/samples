@@ -18,3 +18,11 @@ task build { dependsOn test, assemble }
 // gradle --console=plain build
 // gradle --console=plain build -x test
 // gradle --console=plain build -x test -x assemble
+
+if (hasProperty('releaseManager')) { // call with -PreleaseManager
+  task upload {
+    doLast {
+      println "upload"
+    }
+  }
+}
