@@ -7,16 +7,16 @@
     See the DSL reference of Task.dependsOn method to find out what arguments are accepted.
 */
 
+task date {
+    dependsOn 'hello', 'setup'
+    doLast {
+        println new Date()
+    }
+}
+
 task hello {
     doLast {
         println "Hello World"
-    }   
-}
-
-task date {
-    dependsOn hello, 'setup'
-    doLast {
-        println new Date()
     }
 }
 
