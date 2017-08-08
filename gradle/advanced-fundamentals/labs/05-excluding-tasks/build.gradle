@@ -19,7 +19,7 @@ task build { dependsOn test, assemble }
 // gradle --console=plain build -x test
 // gradle --console=plain build -x test -x assemble
 
-if (hasProperty('releaseManager')) { // call with -PreleaseManager
+if (System.getProperty('releaseManager') != null || hasProperty('releaseManager')) { // call with -PreleaseManager
   task upload {
     doLast {
       println "upload"
@@ -28,7 +28,7 @@ if (hasProperty('releaseManager')) { // call with -PreleaseManager
 }
 
 task upload2 {
-  onlyIf { hasProperty('releaseManager') }
+  onlyIf { System.getProperty('releaseManager') != null || project.hasProperty('releaseManager') } // needs project.hasProperty, otherwise it would call hasProperty on the wrong delegate
   doLast {
     println "upload2"
   }
