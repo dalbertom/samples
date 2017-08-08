@@ -26,3 +26,18 @@ Dependencies on tasks that haven't been defined yet can be setup in different wa
 * dependsOn "setup"
 * dependsOn { setup }
 * or add a task configuration that calls dependsOn right after the task it depends on has been defined.
+
+## Lab 4 task ordering
+* dependsOn (e.g task b depends on task a) means that to run task b it must run task a first
+* Ordering dependency e.g. integrationTests.mustRunAfter(unitTests) to force ordering on tasks that are independent
+** mustRunAfter doesn't imply the other task has to run
+** shouldRunAfter is much less strict than mustRunAfter
+** yields dependsOn if there would be a cycle otherwise
+*** If there's a cycle due to dependsOn, shouldRunAfter will not fail, whereas mustRunAfter will break
+* finalizedBy to do a cleanup e.g.
+```
+task integrationTests {
+  dependsOn startWebServer
+  finalizedBy stopWebServer // it's often used for releasing resources, like Java's try-finally block
+}
+```
