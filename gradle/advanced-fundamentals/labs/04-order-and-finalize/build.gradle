@@ -26,6 +26,9 @@ task integTest {
    dependsOn startWebServer
    mustRunAfter unitTest
    finalizedBy stopWebServer
+   doLast {
+    throw new GradleException("make it fail")
+   }
 }
 
 task funcTest {
