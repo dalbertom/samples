@@ -1,0 +1,19 @@
+task date {
+    doLast {
+        println new Date()
+    }
+}
+
+task hello {
+    doLast {
+        println "Hello World"
+    }   
+}
+
+task moreGreetings { dependsOn hello }
+
+task setup 
+
+date {
+    dependsOn hello, setup
+}

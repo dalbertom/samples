@@ -1,0 +1,11 @@
+apply plugin: "war"
+
+version = "2.5"
+
+dependencies {
+    compile project(":shared")
+    compile project(path: ":api", configuration: "default")
+    compile "commons-collections:commons-collections:3.2@jar"
+    compile "commons-io:commons-io:1.2"
+    compile "commons-lang:commons-lang:2.4@jar"
+}

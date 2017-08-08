@@ -1,0 +1,19 @@
+gradle.taskGraph.whenReady { graph ->
+    if (graph.hasTask(":upload") && !project.hasProperty("uploadUrl")) {
+        throw new GradleException("To execute upload you need to set the uploadUrl property.")
+    }
+}
+
+task build {
+	  doLast {
+		    println "Building ..."
+	  }
+}
+
+task upload {
+    dependsOn build
+	  doLast {
+		    println "Uploading ..."
+	  }
+}
+

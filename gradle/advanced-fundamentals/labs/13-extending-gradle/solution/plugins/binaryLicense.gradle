@@ -1,0 +1,16 @@
+class LicensePlugin implements Plugin<Project>{	
+	  void apply(Project proj){
+		    proj.ext.openSourceLicenses =  ["LGPL", "GPL", "ASL", "EPL"]
+		    proj.ext.allOpenSourceLibs = proj.tasks.withType(Zip).matching { it.isOpenSource() }
+		
+		    proj.tasks.withType(Zip) {
+		        ext {
+		            license = null
+		            isOpenSource = {
+		                project.openSourceLicenses.contains(license)
+		            }
+		        }
+		    }
+	  }
+}
+

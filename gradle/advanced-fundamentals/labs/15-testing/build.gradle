@@ -1,0 +1,35 @@
+/*
+    1. Run the test task and take a look at the report at build/reports/tests/index.html.
+    2. Run the tests with different settings for `forkEvery`. What do you see?
+    3. Run the tests with different settings for `maxParallelForks`. What do you see?
+    4. Annotate a few tests with `@org.junit.Ignore`. Implement a test listener that logs a warning for each skipped test.
+        Hint: Consult the DSL reference for the `org.gradle.api.tasks.testing.Test.afterTest` method for how to listen to test outcomes.
+    5. Instead of using a test listener, configure test logging to show skipped tests (in addition to failed tests).
+        Hint: Consult the DSL reference for the `org.gradle.api.tasks.testing.Test.testLogging` property for how to configure test logging.
+    
+    6. (Optional) Implement a test listener that writes the names of all tests that run longer than 20 milliseconds to a text file.
+    7. (Optional) After a test run has completed, automatically open the text file (in the default text editor) if long-running tests were found.
+        Hint: To execute an external command in Groovy, use `"command args".execute()`.
+*/
+
+apply plugin: "java"
+
+version = "1.0"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "commons-collections:commons-collections:3.2"
+    testCompile "junit:junit:4.11"
+}
+
+
+
+
+
+
+
+
+

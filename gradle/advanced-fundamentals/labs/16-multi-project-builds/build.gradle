@@ -1,0 +1,38 @@
+/*
+    1. Investigate the structure of the multi project build. Execute the `build` task from the root project and observe what is happening. 	
+    2. Go to the `api` project and execute `build` from there. Next execute `buildNeeded` and `buildDependents`. How do the latter differ from `build`?
+    3. Execute the `build` task of the `api` project from the root project directory.
+    4. Execute `gradle projects` from the root directory.
+    5. Execute `gradle projects` and `gradle :projects` from the services directory.
+    6. Execute `gradle tasks` and `gradle :api:tasks` from the root project directory.
+    7. Execute `gradle :services:webservice:properties` from the root project directory.
+    8. Execute `gradle --profile clean build` from the root project. Have a look at the profile report in `build/reports/profile`.
+
+    9. (optional) Change the root project name to 'multi-build'.
+    10. (optional) Configure the subprojects' build file names to follow their project names, for example 'api/api.gradle' instead of 'api/build.gradle'.
+*/    
+
+subprojects {
+    apply plugin: "java"
+    apply plugin: "eclipse"
+
+    version = "1.0"
+    
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testCompile "junit:junit:4.11"
+    }
+}
+
+configure(nonWebProjects()) {
+    jar.manifest.attributes Implementor: "Gradle Inc."
+}
+
+def nonWebProjects() {
+    subprojects.findAll { !it.name.startsWith("web") }
+}
+
+

@@ -1,0 +1,17 @@
+def filteredContent = fileTree("content").matching { include "**/*.txt" }
+
+task showFiles {
+    doLast {
+        filteredContent.each { println it }
+    }
+}
+
+task copyTree(type: Copy) {
+    from filteredContent
+    into "$buildDir/filetree"
+}
+
+task copyFiles(type: Copy) {
+    from filteredContent.files
+    into "$buildDir/files"
+}

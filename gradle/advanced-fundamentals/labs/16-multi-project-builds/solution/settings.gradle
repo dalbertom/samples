@@ -1,0 +1,6 @@
+include "shared", "api", "services:webservice"
+
+rootProject.name = "multi-build"
+
+project(':api').buildFileName = "api.gradle"
+project(':services:webservice').buildFileName = "webservice.gradle"

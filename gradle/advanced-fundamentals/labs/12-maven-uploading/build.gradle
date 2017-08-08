@@ -1,0 +1,13 @@
+/*
+	1. Configure the uploadArchives task to upload to $buildDir/repo as a Maven repo (hint: you can use file:// URLs)
+	2. Execute the uploadArchives task
+	3. Find the pom descriptor that was uploaded and inspect it
+	4. Add a dependency on "commons-collections:commons-collections:3.2" to the compile configuration
+	5. Execute uploadArchives
+	6. Inspect how the uploaded pom.xml changed
+	7. Add a description to the POM
+*/
+apply plugin: "java"
+
+group = "org.company"
+version = "1.0"

@@ -1,0 +1,5 @@
+task info {
+	doLast {
+		println project.name
+	}
+}

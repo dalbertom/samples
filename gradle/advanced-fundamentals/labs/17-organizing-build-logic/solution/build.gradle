@@ -1,0 +1,21 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.apache.commons:commons-math:2.1"
+    }
+}
+
+task commonsMath {
+    doLast { 
+        println org.apache.commons.math.util.MathUtils.factorial(5)
+    }
+}
+
+task buildSource {
+    doLast {
+        println org.gradle.training.Decorator.decorate("Gradle", "**")
+    }
+}
+

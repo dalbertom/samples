@@ -1,0 +1,8 @@
+/*
+    1. Define a `FileTree` that specifies all `*.txt` files under `content`.
+    2. Add a task `showFiles` that prints out the files of the file tree defined in 1.).
+    3. Add a task `copyTree` that copies the file tree from 1.) into `build/filetree`.
+    4. Add a task `copyFiles` that copies all files of the file tree from 1.) into `build/files`.
+
+        Hint: `FileTree`, `FileCollection` and `Set<File>` objects are valid inputs for the Copy task.
+*/    

@@ -1,0 +1,50 @@
+/*
+ * Copyright 2012 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+    1. Run 'dependencies' task and inspect the content. What version commons-logging is used?
+    2. Use 'dependencyInsight' task and find out why given commons-logging version is used.
+    3. Force commons-logging:1.1. Use "force = true" setting when declaring the dependency. Inspect the output of 'dependencyInsight'.
+    4. Remove the direct dependency to commons-logging, inspect 'dependencies' output. What version commons-logging is used?
+    5. Configure the dependency resolution to use commons-logging:1.1. Don't add any direct dependencies, use resolutionStrategy.force, validate with 'dependencyInsight'.
+    6. Remove resolutionStrategy.force, use resolutionStrategy.eachDependency hook to force commons-logging:1.1. Inspect the output of 'dependencyInsight' - how does the report describe the version selection reason?
+*/
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    deps
+}
+
+dependencies {
+    /* Step 3
+    deps("commons-logging:commons-logging:1.1") {
+        force = true
+    }
+    */
+    deps "org.apache.httpcomponents:httpclient:4.0.3"
+}
+
+// Step 5
+// configurations.deps.resolutionStrategy.force "commons-logging:commons-logging:1.1"
+
+configurations.deps.resolutionStrategy.eachDependency {
+    if (it.requested.name == 'commons-logging') {
+        it.useVersion '1.1'
+    }
+}

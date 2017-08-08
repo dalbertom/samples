@@ -1,0 +1,36 @@
+class Size extends DefaultTask {
+    @InputFiles
+    FileTree inputFiles
+
+    @OutputFile
+    File outputFile
+
+    @TaskAction
+    void generate() {
+        outputFile.text = inputFiles.files.collect { it.size() }.sum(0)
+    }
+}
+
+task textsize(type: Size) {
+    inputFiles = fileTree("src/textfiles")
+    outputFile = file("$buildDir/textsize.txt")
+}
+
+// Only needed for optional exercises
+task generator {
+    ext.generatedDir = file("$buildDir/generated")
+    doLast {
+        mkdir(generatedDir)
+        file("$generatedDir/file1").text = "some text"
+        file("$generatedDir/file2").text = "some text 2"
+    }
+}
+
+def generatedFiles = fileTree(generator.generatedDir) {
+    builtBy generator
+}
+
+task sizeGenerated(type: Size) {
+    inputFiles = generatedFiles
+    outputFile = file("$buildDir/sizeGenerated.txt")
+}

@@ -1,0 +1,37 @@
+apply plugin: "java"
+
+version = "1.0"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "commons-collections:commons-collections:3.2"
+    testCompile "junit:junit:4.7"
+}
+
+test {
+    //reports.html.enabled = false
+    forkEvery = 50
+    maxParallelForks = 2
+    testLogging {
+        events "skipped", "failed"
+        showStackTraces = true
+    }
+
+    def slowTestsFile = file("$buildDir/slowTests.txt")
+    doFirst {
+        slowTestsFile.delete()
+    }
+    doLast {
+        if (slowTestsFile.exists()) "open $slowTestsFile".execute()
+    }
+
+    afterTest { TestDescriptor descriptor, TestResult result ->
+        long duration = result.endTime - result.startTime
+        if (duration > 20) {
+            slowTestsFile << "${descriptor.className}.${descriptor.name}\n"
+        }
+    }
+}

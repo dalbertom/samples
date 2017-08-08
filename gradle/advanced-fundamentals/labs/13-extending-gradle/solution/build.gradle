@@ -1,0 +1,44 @@
+apply plugin: "base" // Get the defaults for the zip naming and destination
+apply from: "plugins/license.gradle"
+
+task freeImages(type: Zip) {
+    from "img/free"
+    license = "GPL"
+}
+
+task royaltyImages(type: Zip) {
+    from "img/royalties"
+    license = "commercial"
+}
+
+task publicDocs(type: Zip) {
+    from "docs/public"
+    license = "LGPL"
+}
+
+task enterpriseDocs(type: Zip) {
+    from "docs/enterprise"
+    license = "commercial"
+}
+
+task eclipseLibs(type: Zip) {
+    from "libs/eclipse"
+    license = "EPL"
+}
+
+task oracleLibs(type: Zip) {
+    from "libs/oracle"
+    license = "commercial"
+}
+
+task showOpenSourceLibs {
+    doLast {
+        allOpenSourceLibs.each { println it }
+    }
+}
+
+task openSourceLibs { dependsOn allOpenSourceLibs }
+
+
+
+

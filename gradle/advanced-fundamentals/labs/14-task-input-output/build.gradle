@@ -1,0 +1,42 @@
+/*
+    Background: The `Size` task counts the size of all the files of the `inputFiles` file tree and writes the accumulated size into `outputFile`.
+
+     1. Add a task `textsize` of type `Size`. Set `inputFiles` to a FileTree of `src/textfiles`. Set `outputFile` to `build/textsize.txt`.
+     2. Run `textsize`. Why do you get an exception?
+     3. Use annotations to declare the input/output values of the `Size` type.
+     4. Rerun `textsize` a few times. What do you see?
+     5. Change the contents of an input file and rerun `textsize` a few times. What do you see?
+     6. Change the contents of the output file and rerun `textsize` a few times. What do you see?
+     7. Change the `inputFiles` property to null and rerun `textsize`. Why does it fail?
+     8. Explicitly remove the build directory and rerun `textsize`. Is there any explicit logic that creates the build directory? How is it created?
+     9. Run `cleanTextsize` and find out what it does.
+     
+    10. (Optional) Create a `FileTree` based on the `generator.generatedDir` directory that is buildable by the `generator` task.
+        Assign the file tree to a variable named `generatedFiles`.
+    11. (Optional)  Add a task `sizeGenerated` of type `Size` that has `generatedFiles` as an input. Execute the task.
+    12. (Optional)  Remove the input annotation for the `Size` task and execute `sizeGenerated` again. What do you see?
+*/
+
+apply plugin: "base" // for cleanTextsize task
+
+class Size extends DefaultTask {
+    FileTree inputFiles
+
+    File outputFile
+
+    @TaskAction
+    void generate() {
+        outputFile.text = inputFiles.files.collect { it.size() }.sum(0)
+    }
+}
+
+// Only needed for optional exercises
+task generator {
+    ext.generatedDir = file("$buildDir/generated")
+    doLast {
+        mkdir(generatedDir)
+        file("$generatedDir/file1").text = "some text"
+        file("$generatedDir/file2").text = "some text 2"
+    }
+}
+

@@ -1,0 +1,27 @@
+/* Step 1
+class GroovyBuildListener extends BuildAdapter {
+    void projectsEvaluated(Gradle gradle) {
+		if (gradle.rootProject.hasProperty('test')) {
+			gradle.rootProject.test {
+	        	afterTest { TestDescriptor descriptor, TestResult result ->
+	            	if (result.resultType.toString() == "SKIPPED") {
+	                	logger.warn "Skipped test ${descriptor.className}.${descriptor.name}"
+	            	}
+	        	}
+			}
+		}
+	}
+}
+
+gradle.addListener(new GroovyBuildListener())
+*/
+
+gradle.allprojects {
+    tasks.withType(Test) {
+        afterTest { TestDescriptor descriptor, TestResult result ->
+            if (result.resultType.toString() == "SKIPPED") {
+                logger.warn "Skipped test ${descriptor.className}.${descriptor.name}"
+            }
+        }
+    }
+} 

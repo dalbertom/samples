@@ -1,0 +1,14 @@
+// ant.importBuild("build.xml")
+// printChecksum.doFirst { println "before Ant target" }
+// printChecksum.doLast { println "after Ant target" }
+
+task printChecksum {
+    doLast {
+	      ant.checksum(property: "checksumOut") {
+            fileset(dir: ".") {
+                include(name: "agile.txt")
+            }
+        }
+        println ant.checksumOut
+    }
+}

@@ -1,0 +1,9 @@
+/*
+    1. Apply the plugin `info.gradle` in the `plugins` directory to the build. Execute `gradle tasks` to see what task has been added. Execute the task.
+	2. Create a binary plugin called InfoPlugin (you can write it in the build script)
+	3. As its implementation, add a task called info that prints the project name
+	4. Apply the plugin
+	5. Execute the task
+	6. Create a custom task type for the plugin, replacing the DefaultTask
+        Hint: See the Javadoc reference for org.gradle.api.tasks.TaskContainer to see the different forms of the create() method.
+*/    

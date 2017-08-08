@@ -1,0 +1,14 @@
+ext {
+    openSourceLicenses = ["LGPL", "GPL", "ASL", "EPL"]
+    allOpenSourceLibs = tasks.withType(Zip).matching { it.isOpenSource() }
+}
+
+tasks.withType(Zip) {
+    ext {
+        license = null
+        isOpenSource = {
+            openSourceLicenses.contains(license)
+        }
+    }
+}
+

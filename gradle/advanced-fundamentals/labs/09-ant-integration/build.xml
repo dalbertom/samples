@@ -1,0 +1,10 @@
+<project name='checksum'>
+	<target name='printChecksum'>
+		<checksum property='checksumOut'>
+			<fileset dir='.'>
+				<include name='agile.txt'/>
+			</fileset>
+		</checksum>
+		<echo>${checksumOut}</echo>
+	</target>
+</project>

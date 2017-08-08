@@ -1,0 +1,21 @@
+/*
+    1. Add a task `moreGreetings` that depends on the `hello` task. Execute both `date` and `moreGreetings` in a single run.
+    2. Add a task `setup`, on which `date` should depend. Execute `date`.
+    3. Change the order of execution of `hello` and `setup`, by specifying either of them as the first task to be executed (on the command line).
+    4. Discuss: Would it be OK to say `gradle date setup`? What would be the effect?
+    5. Declare and configure 'date' task before 'hello'. Run the build and inspect the failure. Fix the problem
+    See the DSL reference of Task.dependsOn method to find out what arguments are accepted.
+*/
+
+task hello {
+    doLast {
+        println "Hello World"
+    }   
+}
+
+task date {
+    dependsOn hello
+    doLast {
+        println new Date()
+    }
+}

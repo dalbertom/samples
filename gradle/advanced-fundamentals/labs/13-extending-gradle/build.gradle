@@ -1,0 +1,41 @@
+/*
+    1. Add an extra property `license` to all Zip tasks.
+    2. Set the license property for a couple of zips.
+    3. Add an extra method `isOpenSource` to all Zip tasks. The method should return `true` if the zip has an open source license.
+    4. Add a task `openSourceZips` that builds all the zips that have an open source license.
+    5. Add another task `showOpenSourceZips` that prints out all zip tasks that have an open source license.
+    6. (Optional) Extract the code that enhances the Zip task into a script plugin. This plugin should also add an extra property `allOpenSourceZips` to the project object.
+    7. (Optional) Extract the code of the script plugin into a binary plugin.
+*/
+    
+apply plugin: "base" // Get the defaults for the zip naming and destination
+
+ext {
+    openSourceLicenses = ["LGPL", "GPL", "ASL", "EPL"]
+}
+
+task freeImages(type: Zip) {
+    from "img/free"
+}
+
+task royaltyImages(type: Zip) {
+    from "img/royalties"
+}
+
+task publicDocs(type: Zip) {
+    from "docs/public"
+}
+
+task enterpriseDocs(type: Zip) {
+    from "docs/enterprise"
+}
+
+task eclipseLibs(type: Zip) {
+    from "libs/eclipse"
+}
+
+task oracleLibs(type: Zip) {
+    from "libs/oracle"
+}
+
+

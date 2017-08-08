@@ -1,0 +1,21 @@
+/*
+    1. Run 'dependencies' task and inspect the content. What version of 'commons-logging' is used?
+    2. Use 'dependencyInsight' task and find out why given 'commons-logging' version is used.
+    3. Force commons-logging:1.1. Use "force = true" setting when declaring the dependency. Inspect the output of 'dependencyInsight'.
+    4. Remove the direct dependency to commons-logging, inspect 'dependencies' output. What version of commons-logging is used?
+    5. Configure the dependency resolution to use commons-logging:1.1. Don't add any direct dependencies, use resolutionStrategy.force, validate with 'dependencyInsight'.
+    6. Remove resolutionStrategy.force, use resolutionStrategy.eachDependency hook to force commons-logging:1.1. Inspect the output of 'dependencyInsight' - how does the report describe the version selection reason?
+*/
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    deps
+}
+
+dependencies {
+    deps "commons-logging:commons-logging:1.1"
+    deps "org.apache.httpcomponents:httpclient:4.0.3"
+}

@@ -1,0 +1,35 @@
+/*
+    1. Make `allTests` depend on the test tasks, execute `gradle allTests`
+    2. Order the test tasks so that they execute in order: unitTest, integTest, funcTest, execute `gradle allTests`
+        - Use `mustRunAfter`
+    3. Ensure that the web server is running for `integTest` and `funcTest`
+        - The task `startWebServer` and `stopWebServer` control the web server
+        - Use `dependsOn` and `finalizedBy`
+    4. Execute `gradle integTest`, then `gradle funcTest` - notice the web server tasks are executed
+    5. Make the integTest task fail, for example by adding an action to the task that throws an exception.
+    6 (Optional). Task allTests runs all test tasks with name that ends with 'Test'
+*/
+
+task startWebServer {
+    
+}
+
+task stopWebServer {
+    
+}
+
+task unitTest {
+    
+}
+
+task integTest {
+    
+}
+
+task funcTest {
+    
+}
+
+task allTests {
+    
+}

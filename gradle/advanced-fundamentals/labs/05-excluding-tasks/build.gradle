@@ -1,0 +1,17 @@
+/*
+    1. Execute the `build` task.
+    2. Execute the `build` task, excluding the `test` task.
+    3. Execute the `build` task, excluding the `test` and `assemble` task.
+    4. If the system property `releaseManager` is set, add an `upload` task.
+        Hint: You can pass a system property to Gradle with the `-D` command line option.
+
+    5. Execute `gradle tasks` with and without `releaseManager` set.
+    6. (Optional) Change the code: always create `upload` task
+        but use onlyIf method to skip the upload task when `releaseManager` is not set
+*/    
+
+task generateTestData
+task test { dependsOn generateTestData }
+task assemble
+task build { dependsOn test, assemble }
+

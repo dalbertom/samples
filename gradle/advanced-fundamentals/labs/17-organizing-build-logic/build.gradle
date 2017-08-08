@@ -1,0 +1,28 @@
+/*
+    Background: This build has two tasks, `commonsMath` and `buildSource`. Both tasks have actions which use external code.
+    `commonsMath` requires `org.apache.commons:commons-math:2.1` from Maven Central. `buildSource` requires the binaries of the Java class `input/Decorator.java`.
+
+    1. Try to execute the task `commonsMath`. Gradle will tell you that the build script does not compile. The same happens if you execute `buildSource`.
+    2. Add the necessary classes to the build script class path. Assuming `Decorator.java` is only used in this build, what's the best way to get it on the build script class path?
+
+    3. (optional) Create a separate build for `Decorator.java`. Publish its Jar to the local Maven repository, and make the other build consume it from there.
+    4. (optional) Instead of the local Maven repository, use a (local) Ivy repository to share the Jar.
+
+        Hints:
+
+        1. Use the `maven` plugin to publish to the local Maven repository (see the user guide for more information). Don't forget to declare the local Maven repository in the consuming build.
+        2. Publishing and consuming from a local Ivy repository works just like for a remote Ivy repository, except that the repository has a `file:///` URL.
+*/
+    
+task commonsMath {
+    doLast { 
+        println org.apache.commons.math.util.MathUtils.factorial(5)
+    }
+}
+
+task buildSource {
+    doLast { 
+        println org.gradle.training.Decorator.decorate("Gradle", "**")
+    }
+}
+

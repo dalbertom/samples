@@ -1,0 +1,21 @@
+/*
+    1. Let the build fail (before any task is executed) if the `upload` task is to be executed and the `uploadUrl` project property is not set.
+
+        Hints:
+        1. To set a project property on the command line, use `-Pfoo=bar`.
+        2. To check if a project property exists, use `project.hasProperty('somePropertyName')`.
+*/    
+    
+task build {
+    doLast {
+        println "Building ..."
+    }
+}
+
+task upload {
+    dependsOn build
+    doLast {
+        println "Uploading ..."
+    }
+}
+

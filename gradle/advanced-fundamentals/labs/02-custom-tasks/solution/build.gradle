@@ -1,0 +1,14 @@
+task defaultGreeting(type: Greeting)
+
+task customGreeting(type: Greeting) {
+    greeting = "Hello from me"
+}
+
+class Greeting extends DefaultTask {
+    String greeting = "Hello from Gradle"
+
+    @TaskAction
+    void printGreeting() {
+        println greeting
+    }
+}

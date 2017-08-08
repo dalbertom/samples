@@ -1,0 +1,37 @@
+/*
+    1. Make `allTests` depend on the test tasks, execute `gradle allTests`
+    2. Order the test tasks so that they execute in order: unitTest, integTest, funcTest, execute `gradle allTests`
+        - Use `finalizedBy`
+    3. Ensure that the web server is running for `integTest` and `funcTest`
+        - The task `startWebServer` and `stopWebServer` control the web server
+        - Use `dependsOn` and `finalizedBy`
+    4. Execute `gradle integTest`, then `gradle funcTest` - notice the web server tasks are executed
+*/
+
+task startWebServer {
+    
+}
+
+task stopWebServer {
+    
+}
+
+task unitTest {
+    
+}
+
+task integTest {
+    mustRunAfter unitTest
+    dependsOn startWebServer
+    finalizedBy stopWebServer
+}
+
+task funcTest {
+    mustRunAfter unitTest, integTest
+    dependsOn startWebServer
+    finalizedBy stopWebServer
+}
+
+task allTests {
+    dependsOn unitTest, integTest, funcTest
+}

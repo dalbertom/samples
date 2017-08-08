@@ -1,0 +1,8 @@
+/*
+    1. Import the Ant build and run it from Gradle.
+    2. Add a `println` before and after the Ant target gets executed.
+    3. Instead of importing the Ant build, implement a Gradle task that uses the Ant checksum task.
+
+        Hint: To access an Ant property named `foo`, use `ant.properties.foo` or `ant.foo`.
+*/    
+    

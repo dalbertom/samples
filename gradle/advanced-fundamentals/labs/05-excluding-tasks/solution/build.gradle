@@ -1,0 +1,17 @@
+task generateTestData
+task test { dependsOn generateTestData }
+task assemble
+task build { dependsOn test, assemble }
+
+/* Step 4
+if (System.getProperty("releaseManager") != null) {
+    task upload {
+		doLast { println "Upload!!!" }
+	}
+}
+*/
+
+task upload {
+	onlyIf { System.getProperty("releaseManager") != null }
+	doLast { println "Upload!!!" }
+}
