@@ -23,11 +23,15 @@ task unitTest {
 }
 
 task integTest {
+   dependsOn startWebServer
    mustRunAfter unitTest
+   finalizedBy stopWebServer
 }
 
 task funcTest {
+   dependsOn startWebServer
    mustRunAfter integTest
+   finalizedBy stopWebServer
 }
 
 task allTests {
