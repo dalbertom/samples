@@ -19,3 +19,6 @@ task date {
         println new Date()
     }
 }
+
+task moreGreetings(dependsOn: hello)
+// gradle dateMoreGreetings
