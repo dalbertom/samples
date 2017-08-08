@@ -9,3 +9,22 @@
        
     2. Is there an alternative to using an annotation for adding a task action to a custom task?
 */
+
+
+class Greeting extends DefaultTask {
+  //@Input
+  def greeting = "world"
+
+  @TaskAction
+  void greet() {
+    println "Hello $greeting"
+  }
+}
+
+task greeting1(type: Greeting)
+
+task greeting2(type: Greeting) {
+  greeting = 'David'
+}
+
+defaultTasks 'greeting1', 'greeting2'
