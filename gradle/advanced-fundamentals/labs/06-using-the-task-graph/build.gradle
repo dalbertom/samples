@@ -19,3 +19,8 @@ task upload {
     }
 }
 
+gradle.taskGraph.whenReady { graph ->
+  if (graph.hasTask(':upload') && !project.hasProperty('uploadUrl')) {
+    throw new GradleException('run with -PuploadUrl=<url>')
+  }
+}
