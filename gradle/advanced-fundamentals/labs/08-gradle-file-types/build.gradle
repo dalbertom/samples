@@ -1,3 +1,4 @@
+apply plugin: 'base' // to get the clean task
 /*
     1. Define a `FileTree` that specifies all `*.txt` files under `content`.
     2. Add a task `showFiles` that prints out the files of the file tree defined in 1.).
@@ -7,11 +8,13 @@
         Hint: `FileTree`, `FileCollection` and `Set<File>` objects are valid inputs for the Copy task.
 */    
 
-def ft = fileTree(dir: 'content', include: '**/*.txt')
+//def ft = fileTree(dir: 'content', include: '**/*.txt')
+def ft = fileTree(dir: 'content').matching { include '**/*.txt' }
 
 task showFiles {
   doLast {
-    ft.visit {
+    ft.each { //only shows files
+    //ft.visit { //shows dirs as well
       println it
     }
   }
