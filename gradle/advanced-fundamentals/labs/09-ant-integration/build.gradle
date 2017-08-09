@@ -6,3 +6,12 @@
         Hint: To access an Ant property named `foo`, use `ant.properties.foo` or `ant.foo`.
 */    
 ant.importBuild 'build.xml'
+
+printChecksum {
+  doFirst {
+    println 'before'
+  }
+  doLast {
+    println 'after'
+  }
+}
