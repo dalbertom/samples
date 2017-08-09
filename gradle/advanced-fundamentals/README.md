@@ -58,3 +58,22 @@ if (isReleaseManagerUser()) {
 ```
 
 can use export TERM=dumb instead of --console=plain
+
+## Lab 6 querying the task execution graph
+```
+gradle.taskGraph.whenReady { graph ->
+  if (graph.hasTask(':release')) {
+    ...
+  }
+}
+
+task someTask {
+  doLast { // during task execution
+    if (gradle.taskGraph.hasTask(':otherTask')) {
+      ...
+    }
+  }
+}
+
+println gradle.taskGraph.allTasks // would throw an exception because this runs during configuration and task graph hasn't been built yet
+```
