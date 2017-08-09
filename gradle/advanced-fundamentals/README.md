@@ -142,3 +142,28 @@ They are classes that implement `Plugin<Project>` and have an `apply` method.
 The plugin ID is set in META-INF/gradle-plugins/<plugin id>.properties
 And the properties file has implementation-class=org.foo.plugins.MyPlugin
 Allows the plugin author to change the class or package without affecting the users because they will just use the id
+
+More flexible
+```
+buildscript {
+   classpath 'com.foo:bar:1.2'
+}
+apply plugin: 'com.foo.bar'
+```
+
+Instead of doing `apply plugin:` it is now preferred to use the `plugins` block, which also goes to the Gradle Portal
+```
+plugins {
+  id "com.foo.bar" version "1.2"
+}
+```
+
+In settings.gradle you can add other plugin repositories
+```
+pluginManagement {
+  repositories {
+    // add other repositories
+    gradlePluginPortal()
+  }
+}
+```
