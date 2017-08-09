@@ -167,3 +167,21 @@ pluginManagement {
   }
 }
 ```
+
+## Gradle File Types
+* FileCollection: flattened set of files (e.g. classpath)
+* FileTree (extends FileCollection): hierarchy of files (e.g. directory)
+
+Project methods:
+* files() -> FileCollection
+* fileTree() -> FileTree
+* zipTree() -> ZipFileTree
+* tarTree() -> TarFileTree
+
+Features:
+* path representations
+* ant integrations
+* relative paths are resolved against the root project
+* additive (you can add/subtract them)
+* lazily evaluated
+* Buildable - you can tie the creation of the file object to a task `builtBy`
