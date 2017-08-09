@@ -185,3 +185,15 @@ Features:
 * additive (you can add/subtract them)
 * lazily evaluated
 * Buildable - you can tie the creation of the file object to a task `builtBy`
+
+## Misc File Stuff
+* Delete
+** Delete task (type: Delete)
+** delete method
+* Copy
+** Copy task (type: Copy)
+** copy method
+*** no up-to-date check, prefer Copy task whenever possible
+* mkdir method
+* there is no move task/method
+* no jar/zip/tar methods
