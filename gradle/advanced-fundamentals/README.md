@@ -200,3 +200,11 @@ Features:
 
 ## Ant integration
 myFileTree.addToAntBuilder(ant, "fileset")
+
+## Dependency Management
+* Configuration is a FileCollection
+* Has rich API
+
+### Transitive Dependencies
+* Default version conflict resolution is newest
+* Option to fail conflict resolution, e.g. configurations.myconf.resolutionStrategy.failOnVersionConflict()
