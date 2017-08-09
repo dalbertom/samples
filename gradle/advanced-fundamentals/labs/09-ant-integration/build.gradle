@@ -15,3 +15,14 @@ printChecksum {
     println 'after'
   }
 }
+
+task printChecksum2 {
+  doLast {
+    ant.checksum(property: 'checksumOut') {
+      fileset(dir: '.') {
+        include(name: 'agile.txt')
+      }
+    }
+    ant.echo ant.properties.checksumOut
+  }
+}
