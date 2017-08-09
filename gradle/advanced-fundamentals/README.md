@@ -96,3 +96,30 @@ task groupPing {
   dependsOn pingServer1, pingServer2
 }
 ```
+
+## Logging
+* levels: error, quiet, warning, lifecycle, info, debug
+```
+gradle -i hello
+gradle hello -d
+gradle -q hello
+```
+
+```
+println "A message logged at QUIET level"
+logger.quiet "A message that is always logged."
+logger.error "An error log message."
+logger.warn "A warning log message."
+logger.lifecycle "A lifecycle log message."
+logger.info "An info log message."
+logger.debug "A debug log message."
+```
+
+### Logging from classes
+```
+import org.gradle.api.logging.Logger
+import org.gradle.api.logging.Logging
+
+Logger logger = Logging.getLogger("some-logger")
+logger.info("An info log message")
+```
