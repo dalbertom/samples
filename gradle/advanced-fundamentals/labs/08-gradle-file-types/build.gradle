@@ -6,3 +6,23 @@
 
         Hint: `FileTree`, `FileCollection` and `Set<File>` objects are valid inputs for the Copy task.
 */    
+
+def ft = fileTree(dir: 'content', include: '**/*.txt')
+
+task showFiles {
+  doLast {
+    ft.visit {
+      println it
+    }
+  }
+}
+
+task copyTree(type: Copy) {
+  from ft
+  into "$buildDir/filetree"
+}
+
+task copyFiles(type: Copy) {
+  from ft.files
+  into "$buildDir/files"
+}
