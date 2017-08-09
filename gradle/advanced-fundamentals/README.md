@@ -197,3 +197,6 @@ Features:
 * mkdir method
 * there is no move task/method
 * no jar/zip/tar methods
+
+## Ant integration
+myFileTree.addToAntBuilder(ant, "fileset")
