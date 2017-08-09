@@ -10,13 +10,16 @@
 //apply from: 'plugins/info.gradle'
 apply plugin: InfoPlugin
 
+class InfoTask extends DefaultTask {
+  @TaskAction
+  void doInfo() {
+    println "Project Name: " + project.name
+  }
+}
+
 class InfoPlugin implements Plugin<Project> {
   void apply(Project project) {
-    project.tasks.create('info2') {
-      doLast {
-        println "Project Name: " + project.name
-      }
-    }
+    project.tasks.create(name: 'info2', type: InfoTask)
   }
 }
 
