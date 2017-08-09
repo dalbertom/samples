@@ -77,3 +77,22 @@ task someTask {
 
 println gradle.taskGraph.allTasks // would throw an exception because this runs during configuration and task graph hasn't been built yet
 ```
+
+## Task Rules
+```
+/* The 'Pattern: ping<ID>' string does not affect the execution
+ * it is only used for documentation (e.g. when running gradle tasks)
+ */
+tasks.addRule('Pattern: ping<ID>') { String taskName -> // this runs as part of the Configuration Phase
+  if (taskName.startsWith("ping")) {
+    task(taskName) {
+      doLast {
+        println "Pinging: " + (taskName - "ping")
+      }
+    }
+  }
+}
+task groupPing {
+  dependsOn pingServer1, pingServer2
+}
+```
