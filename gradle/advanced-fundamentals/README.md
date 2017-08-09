@@ -123,3 +123,22 @@ import org.gradle.api.logging.Logging
 Logger logger = Logging.getLogger("some-logger")
 logger.info("An info log message")
 ```
+
+## Plugins
+### Script Plugin
+`apply from: file.gradle`
+`apply from: "http://my.org/path/to/features-1.0.gradle"` // these are not cached, so if url is not accessible the build will fail
+* There is currently a pull request open to allow caching of plugins
+* should be used with care, only useful when you really need that push functionality
+
+### Binary Plugins
+`apply plugin: 'plugin'`
+They are classes that implement `Plugin<Project>` and have an `apply` method.
+#### Two ways to apply them
+* Using class instance
+** apply plugin: org.foo.plugins.MyPlugin
+* Using plugin ID
+** apply plugin: "org.foo.my-plugin"
+The plugin ID is set in META-INF/gradle-plugins/<plugin id>.properties
+And the properties file has implementation-class=org.foo.plugins.MyPlugin
+Allows the plugin author to change the class or package without affecting the users because they will just use the id
