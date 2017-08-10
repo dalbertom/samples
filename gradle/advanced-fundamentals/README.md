@@ -231,3 +231,6 @@ configurations.all {
 ### Dependency Reports
 * `gradle dependencies [--configuration <name>]`
 * `gradle dependencyInsight --dependency <name> --configuration <name>`
+
+
+## Ivy Uploading
