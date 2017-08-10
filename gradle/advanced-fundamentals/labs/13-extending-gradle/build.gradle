@@ -20,6 +20,7 @@ tasks.withType(Zip) {
 
 task freeImages(type: Zip) {
     from "img/free"
+    ext.license = 'LGPL'
 }
 
 task royaltyImages(type: Zip) {
@@ -32,6 +33,7 @@ task publicDocs(type: Zip) {
 
 task enterpriseDocs(type: Zip) {
     from "docs/enterprise"
+    ext.license = 'EPL'
 }
 
 task eclipseLibs(type: Zip) {
