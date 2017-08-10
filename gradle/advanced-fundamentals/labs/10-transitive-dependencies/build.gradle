@@ -10,8 +10,9 @@
     4. Remove the direct dependency to commons-logging, inspect 'dependencies' output. What version of commons-logging is used?
     // 1.1.1
     5. Configure the dependency resolution to use commons-logging:1.1. Don't add any direct dependencies, use resolutionStrategy.force, validate with 'dependencyInsight'.
-    // 1.1
+    // 1.1 (forced)
     6. Remove resolutionStrategy.force, use resolutionStrategy.eachDependency hook to force commons-logging:1.1. Inspect the output of 'dependencyInsight' - how does the report describe the version selection reason?
+    // 1.1 (selected by rule)
 */
 
 repositories {
@@ -20,7 +21,12 @@ repositories {
 
 configurations {
     deps {
-      resolutionStrategy.force "commons-logging:commons-logging:1.1"
+      //resolutionStrategy.force "commons-logging:commons-logging:1.1"
+      resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        if (details.requested.name == 'commons-logging') {
+          details.useVersion '1.1'
+        }
+      }
     }
 }
 
