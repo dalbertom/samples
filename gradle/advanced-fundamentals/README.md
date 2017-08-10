@@ -234,3 +234,9 @@ configurations.all {
 
 
 ## Ivy Uploading
+* uploading to ivy is built-in
+* to upload to maven you need to apply plugin: 'maven'
+
+## Uploading to Maven repository
+### Install to Local Maven
+* gradle install
