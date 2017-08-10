@@ -9,30 +9,7 @@
 */
     
 apply plugin: "base" // Get the defaults for the zip naming and destination
-
-ext {
-    openSourceLicenses = ["LGPL", "GPL", "ASL", "EPL"]
-    allOpenSourceZips = tasks.withType(Zip).matching { task -> task.isOpenSource() }
-}
-
-tasks.withType(Zip) { task ->
-  ext.license = 'unspecified'
-  ext {
-    isOpenSource = {
-      license in openSourceLicenses
-    }
-  }
-}
-
-task openSourceZips {
-  dependsOn allOpenSourceZips
-}
-
-task showOpenSourceZips {
-  doLast {
-    println allOpenSourceZips*.name.join(', ')
-  }
-}
+apply from: 'openSource.gradle'
 
 task freeImages(type: Zip) {
     from "img/free"
