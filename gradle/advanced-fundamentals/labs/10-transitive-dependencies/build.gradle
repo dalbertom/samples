@@ -6,6 +6,7 @@
     // gradle dependencyInsight --configuration deps --dependency commons-logging
     // org.apache.httpcomponents:httpclient brings 1.1.1, which overrides 1.1
     3. Force commons-logging:1.1. Use "force = true" setting when declaring the dependency. Inspect the output of 'dependencyInsight'.
+    // 1.1
     4. Remove the direct dependency to commons-logging, inspect 'dependencies' output. What version of commons-logging is used?
     5. Configure the dependency resolution to use commons-logging:1.1. Don't add any direct dependencies, use resolutionStrategy.force, validate with 'dependencyInsight'.
     6. Remove resolutionStrategy.force, use resolutionStrategy.eachDependency hook to force commons-logging:1.1. Inspect the output of 'dependencyInsight' - how does the report describe the version selection reason?
@@ -20,6 +21,8 @@ configurations {
 }
 
 dependencies {
-    deps "commons-logging:commons-logging:1.1"
+    deps("commons-logging:commons-logging:1.1") {
+      force = true
+    }
     deps "org.apache.httpcomponents:httpclient:4.0.3"
 }
