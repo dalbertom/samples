@@ -13,6 +13,14 @@ apply plugin: 'maven'
 group = "org.company"
 version = "1.0"
 
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile 'commons-collections:commons-collections:3.2'
+}
+
 uploadArchives {
   repositories {
     mavenDeployer {
