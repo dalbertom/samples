@@ -1,6 +1,10 @@
 /*
     1. Run 'dependencies' task and inspect the content. What version of 'commons-logging' is used?
+    // gradle dependencies
+    // 1.1.1 +--- commons-logging:commons-logging:1.1 -> 1.1.1
     2. Use 'dependencyInsight' task and find out why given 'commons-logging' version is used.
+    // gradle dependencyInsight --configuration deps --dependency commons-logging
+    // org.apache.httpcomponents:httpclient brings 1.1.1, which overrides 1.1
     3. Force commons-logging:1.1. Use "force = true" setting when declaring the dependency. Inspect the output of 'dependencyInsight'.
     4. Remove the direct dependency to commons-logging, inspect 'dependencies' output. What version of commons-logging is used?
     5. Configure the dependency resolution to use commons-logging:1.1. Don't add any direct dependencies, use resolutionStrategy.force, validate with 'dependencyInsight'.
