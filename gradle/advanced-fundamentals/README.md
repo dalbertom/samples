@@ -208,3 +208,26 @@ myFileTree.addToAntBuilder(ant, "fileset")
 ### Transitive Dependencies
 * Default version conflict resolution is newest
 * Option to fail conflict resolution, e.g. configurations.myconf.resolutionStrategy.failOnVersionConflict()
+
+### Forcing Versions
+* Can be done in dependencies block
+** explicitly adding hibernate in the configuration, and forcing a version
+* Can be done in configurations.compile.resolutionStrategy.force
+** not adding hibernate, but if it happens to be added, force it to a version
+
+### Dependency Resolution Strategies
+```
+configurations.all {
+  resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+    if (details.requested.group == 'org.gradle') {
+      details.useVersion "1.4"
+    }
+    // details.requested.group, details.requested.name, details.requested.version
+    // details.useVersion "1.4"
+  }
+}
+```
+
+### Dependency Reports
+* `gradle dependencies [--configuration <name>]`
+* `gradle dependencyInsight --dependency <name> --configuration <name>`
