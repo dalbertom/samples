@@ -11,3 +11,11 @@ apply plugin: "java"
 
 version = "1.0"
 group = "org.gradle"
+
+uploadArchives {
+  repositories {
+    ivy {
+      url "file://$buildDir/repo"
+    }
+  }
+}
