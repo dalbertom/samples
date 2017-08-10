@@ -1,13 +1,21 @@
-ext {
-    openSourceLicenses = ["LGPL", "GPL", "ASL", "EPL"]
-    allOpenSourceZips = tasks.withType(Zip).matching { task -> task.isOpenSource() }
-}
+apply plugin: LicensePlugin
 
-tasks.withType(Zip) { task ->
-  ext.license = 'unspecified'
-  ext {
-    isOpenSource = {
-      license in openSourceLicenses
+class LicensePlugin implements Plugin<Project> {
+  void apply(Project project) {
+    project.with {
+      ext {
+          openSourceLicenses = ["LGPL", "GPL", "ASL", "EPL"]
+          allOpenSourceZips = tasks.withType(Zip).matching { task -> task.isOpenSource() }
+      }
+
+      tasks.withType(Zip) { task ->
+        ext.license = 'unspecified'
+        ext {
+          isOpenSource = {
+            license in openSourceLicenses
+          }
+        }
+      }
     }
   }
 }
