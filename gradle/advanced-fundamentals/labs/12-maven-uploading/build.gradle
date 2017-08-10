@@ -8,6 +8,15 @@
 	7. Add a description to the POM
 */
 apply plugin: "java"
+apply plugin: 'maven'
 
 group = "org.company"
 version = "1.0"
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository(url: "file://$buildDir/repo")
+    }
+  }
+}
