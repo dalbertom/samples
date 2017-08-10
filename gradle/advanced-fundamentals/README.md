@@ -271,3 +271,43 @@ tasks.all { // applies to all tasks
 }
 tasks.whenTaskAdded { task -> ... } // applies to tasks created after this rule was defined
 ```
+
+## Tasks Inputs/Outputs
+you can describe
+* input/output files
+* input/output directories
+* input properties
+
+```
+class MyTask extends DefaultTask {
+  @InputFile File text
+  @InputFiles FileCollection path
+  @InputDirectory File templates
+  @Input String mode
+  @OutputFile File result
+  @OutputDirectory File transformedTemplates
+  boolean verbose // ignored
+
+  @TaskAction
+  generate() { ... }
+}
+```
+
+Input/Output API
+```
+ant.import "build.xml"
+someAntTarget {
+  inputs.files
+  inputs.dir
+  outputs.files
+  outputs.dir
+  outputs.upToDateWhen { task ->
+  }
+}
+```
+
+* Input files/dirs are verified to exist
+** Disable with @Optional
+* Output dirs are created before execution
+
+## Inferred Task Dependencies
