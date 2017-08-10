@@ -240,3 +240,34 @@ configurations.all {
 ## Uploading to Maven repository
 ### Install to Local Maven
 * gradle install
+
+## Extending Gradle
+* extra properties
+* extension objects
+```
+class MyExtension {
+  String someProperty
+}
+extensions.create("myDSL", MyExtension)
+extensions.maybeCreate // will only create if it doesn't exist yet
+myDSL {
+  someProperty = "someValue"
+}
+```
+
+## Domain Object Container
+* plugins
+* configurations
+* tasks
+```
+tasks.withType(Jar) // built-in filter
+tasks.matching { task -> // custom filter
+  task.name.startsWith("web")
+}
+tasks.withType(Jar).matching // filter chaining
+
+tasks.all { // applies to all tasks
+  doFirst { ... }
+}
+tasks.whenTaskAdded { task -> ... } // applies to tasks created after this rule was defined
+```
