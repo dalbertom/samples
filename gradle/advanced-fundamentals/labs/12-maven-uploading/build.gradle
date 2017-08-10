@@ -25,6 +25,9 @@ uploadArchives {
   repositories {
     mavenDeployer {
       repository(url: "file://$buildDir/repo")
+      pom.project {
+        description 'this is a description'
+      }
     }
   }
 }
