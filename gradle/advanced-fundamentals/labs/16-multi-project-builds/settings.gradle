@@ -1,3 +1,7 @@
 include "shared", "api", "services:webservice"
 
 rootProject.name = 'multi-build'
+
+rootProject.children.each { project ->
+  project.buildFileName = "${project.name}.gradle"
+}
