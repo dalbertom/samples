@@ -350,3 +350,5 @@ Standard Java lifecycle tasks:
 * assemble
 * check
 * build
+
+## Multi-Project Builds
