@@ -46,3 +46,12 @@ task textSize(type: Size) {
   inputFiles = fileTree("src/textfiles")
   outputFile = file("${buildDir}/textsize.txt")
 }
+
+def generatedFiles = fileTree(generator.generatedDir) {
+  builtBy generator
+}
+
+task sizeGenerated(type: Size) {
+  inputFiles = generatedFiles
+  outputFile = file("${buildDir}/sizeGenerated.txt")
+}
