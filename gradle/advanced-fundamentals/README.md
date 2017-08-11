@@ -357,3 +357,36 @@ gradle buildDependents
 
 ## Organizing our Build Logic
 
+## Hooking into Gradle
+init scripts
+* gradle -I ci-init.gradle
+* or put file in GRADLE_USER_HOME/init.gradle or ~/.gradle/init.d/*.gradle
+
+sample init script
+```
+initscript {
+  repositories { ... }
+  dependencies {
+    classpath ...
+  }
+}
+gradle.startParameter...
+gradle.addBuildListener...
+```
+
+```
+gradle.taskGraph.whenReady { taskGraph -> ... }
+gradle.taskGraph.beforeTask { task -> ... }
+gradle.taskGraph.afterTask { task -> ... }
+gradle.beforeProject { project -> ... }
+gradle.afterProject { project -> ... }
+gradle.addBuildListener(BuildListener listener)
+
+public interface BuildListener { // or extends BuildAdapter if only needs to implement one of the methods
+    void buildStarted(Gradle gradle);
+    void settingsEvaluated(Settings settings);
+    void projectsLoaded(Gradle gradle);
+    void projectsEvaluated(Gradle gradle);
+    void buildFinished(BuildResult result);
+}
+```
