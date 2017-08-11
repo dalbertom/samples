@@ -39,6 +39,12 @@ test {
     events "skipped"
     events "failed"
   }
+  afterTest { desc, result ->
+    def duration = result.endTime - result.startTime
+    if (duration > 20) {
+      println "$desc took $duration"
+    }
+  }
 }
 
 
