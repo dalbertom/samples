@@ -20,8 +20,10 @@
 apply plugin: "base" // for cleanTextsize task
 
 class Size extends DefaultTask {
+    @InputFiles
     FileTree inputFiles
 
+    @OutputFile
     File outputFile
 
     @TaskAction
@@ -40,3 +42,7 @@ task generator {
     }
 }
 
+task textSize(type: Size) {
+  inputFiles = fileTree("src/textfiles")
+  outputFile = file("${buildDir}/textsize.txt")
+}
