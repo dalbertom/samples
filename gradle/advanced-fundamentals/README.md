@@ -311,3 +311,33 @@ someAntTarget {
 * Output dirs are created before execution
 
 ## Inferred Task Dependencies
+
+## Java Plugin
+compileClasspath = sourceSets.main.output + configurations.testCompile
+### Querying Source Sets
+// They all return FileTree
+* sourceSets.main.allJava
+* sourceSets.main.resources
+* sourceSets.main.allResource.matching { include ... }
+// Returns a buildable FileCollection
+* sourceSets.main.output
+
+### Classes Tasks
+* classes, testClasses
+* They are lifecycle tasks used to aggregate other tasks like compile, processResources, etc.
+
+### Test Task
+* `forkEvery`: Custom fork frequency is available but it typically means there is a code smell (memory leak, etc)
+* `scanForTestClasses`: can be set to false to disable automated test finding and then use `include` and `exclude` to specify a custom test path (`**/test/special**/*Test.class`)
+
+#### Test Task Listeners
+```
+test {
+  beforeTest { desc ->
+  }
+  afterTest { desc, result ->
+  }
+  afterSuite { desc, result ->
+  }
+}
+```
