@@ -17,10 +17,12 @@
 buildscript {
   repositories {
     mavenCentral()
+    mavenLocal()
   }
 
   dependencies {
     classpath 'org.apache.commons:commons-math:2.1'
+    classpath 'org.gradle.training:input:1.0' // need to run gradle install on the other project
   }
 }
     

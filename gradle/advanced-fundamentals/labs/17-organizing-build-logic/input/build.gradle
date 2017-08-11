@@ -1,0 +1,5 @@
+apply plugin: 'java'
+apply plugin: 'maven' // needed to run gradle install
+
+group = 'org.gradle.training'
+version = '1.0'
