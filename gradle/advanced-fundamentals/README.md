@@ -341,3 +341,12 @@ test {
   }
 }
 ```
+
+## Lifecycle Tasks
+Standard Java lifecycle tasks:
+* clean
+* classes
+* test
+* assemble
+* check
+* build
