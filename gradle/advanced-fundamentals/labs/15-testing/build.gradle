@@ -26,6 +26,7 @@ dependencies {
 }
 
 test {
+  ext.slowTestFile = file("${buildDir}/slowTests.txt")
   forkEvery = 50
   maxParallelForks = 2
   /*
@@ -43,9 +44,22 @@ test {
     def duration = result.endTime - result.startTime
     if (duration > 20) {
       println "$desc took $duration"
+      slowTestFile << "${desc.className}:${desc.name} -> $duration\n"
     }
   }
+
+  doFirst {
+    delete slowTestFile
+  }
 }
+
+task showSlowTests {
+  onlyIf { test.slowTestFile.exists() }
+  doLast {
+    "open ${test.slowTestFile}".execute()
+  }
+}
+test.finalizedBy showSlowTests
 
 
 
