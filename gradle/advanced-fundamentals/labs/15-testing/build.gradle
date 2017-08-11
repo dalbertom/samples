@@ -28,6 +28,11 @@ dependencies {
 test {
   forkEvery = 50
   maxParallelForks = 2
+  afterTest { desc, result ->
+    if (result.skippedTestCount > 0) {
+      println "$desc, Skipped: ${result.skippedTestCount}"
+    }
+  }
 }
 
 
