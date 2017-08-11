@@ -352,3 +352,8 @@ Standard Java lifecycle tasks:
 * build
 
 ## Multi-Project Builds
+gradle buildNeeded
+gradle buildDependents
+
+## Organizing our Build Logic
+
