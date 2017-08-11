@@ -25,7 +25,10 @@ dependencies {
     testCompile "junit:junit:4.11"
 }
 
-
+test {
+  forkEvery = 50
+  maxParallelForks = 2
+}
 
 
 
