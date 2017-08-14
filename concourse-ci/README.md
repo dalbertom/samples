@@ -52,3 +52,40 @@ List of [resources](https://concourse.ci/resource-types.html):
 * github-release fetch and publish versioned GitHub resources
 * docker-images fetch, build, push Docker images
 * pool configure how to serialize use of an external system
+
+# Tutorials
+## Flight School
+Clone repository on local machine:
+```
+git clone git@github.com:concourse/flight-school /tmp/flight-school
+```
+
+Check things are running:
+```
+cd /tmp/flight-school
+which bundle || gem install bundler
+bundle install
+bundle exec rspec
+```
+
+Install fly
+```
+brew cask install fly
+```
+
+Target and log into Concourse
+```
+fly -t ci login -c http://192.168.100.4:8080
+```
+
+Copy build and test files
+```
+cp flight-school/build.yml flight-school/test.sh /tmp/flight-school
+```
+
+Execute test
+```
+cd /tmp/flight-school
+fly -t ci execute -c build.yml
+cd -
+```
