@@ -89,3 +89,12 @@ cd /tmp/flight-school
 fly -t ci execute -c build.yml
 cd -
 ```
+
+### Starting a Pipeline
+Add pipeline
+```
+cp flight-school/pipeline.yml /tmp/flight-school
+cd /tmp/flight-school
+fly -t ci set-pipeline -p flight-school -c pipeline.yml
+cd -
+```
