@@ -35,3 +35,9 @@ fly -t lite get-pipeline -p hello-world
 ```
 
 Since the pipeline doesn't have any resources to trigger it, we will need to start it manually by clicking the + button on the top-right
+
+## Pipeline with a resource (timer trigger)
+Configure pipeline:
+```
+fly -t lite set-pipeline -p hello-world -c navi-pipeline.yml
+```
