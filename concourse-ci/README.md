@@ -41,3 +41,14 @@ Configure pipeline:
 ```
 fly -t lite set-pipeline -p hello-world -c navi-pipeline.yml
 ```
+
+# Resources
+List of [resources](https://concourse.ci/resource-types.html):
+* git pull and push to git repositories
+* time start jobs on a schedule or timestamp outputs
+* s3 fetch and upload to S3 buckets
+* archive fetch and extract .tar.gz archives
+* semver set or bump version numbers
+* github-release fetch and publish versioned GitHub resources
+* docker-images fetch, build, push Docker images
+* pool configure how to serialize use of an external system
