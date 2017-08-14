@@ -12,3 +12,8 @@ Install fly command line on macOs
 ```
 brew cask install fly
 ```
+
+Target fly to the local VM
+```
+fly -t lite login -c http://192.168.100.4:8080
+```
