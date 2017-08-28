@@ -1,8 +1,8 @@
 # Flight School
 * Clone repository `git clone https://github.com/dalbertom/flight-school /tmp/flight-school`
 * Target concourse `fly -t ci login -c http://$CONCOURSE_EXTERNAL_URL`
-** username: concourse
-** password: changeme
+  * username: concourse
+  * password: changeme
 
 * Copy build.yml file with `cp * /tmp/flight-school`
 * Execute test with:

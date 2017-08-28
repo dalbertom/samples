@@ -1,6 +1,6 @@
 # Hello World
 * Run `fly -t lite login -c http://$CONCOURSE_EXTERNAL_URL`
-** CONCOURSE_EXTERNAL_URL=$(docker-machine ip $DOCKER_MACHINE_NAME):8080
+  * CONCOURSE_EXTERNAL_URL=$(docker-machine ip $DOCKER_MACHINE_NAME):8080
 * username: concourse
 * password: changeme
 * Run `fly -t lite sync`
