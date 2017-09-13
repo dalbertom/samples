@@ -1,0 +1,7 @@
+apply plugin: 'application'
+
+mainClassName = 'com.example.app.Main'
+
+dependencies {
+    compile project(':lib')
+}

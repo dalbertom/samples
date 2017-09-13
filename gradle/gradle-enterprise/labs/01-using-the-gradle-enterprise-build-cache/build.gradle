@@ -1,0 +1,41 @@
+plugins {
+    id 'com.gradle.build-scan' version '1.9'
+    id 'java'
+    id 'application'
+}
+
+buildScan {
+    server = 'https://enterprise-training.gradle.com'
+    publishAlways()
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
+
+// this just guarantees that everyone running the lab pushes their own changes into the remote cache,
+// rather than getting hits from someone else's run
+tasks.create('generateLocalUniqueValue') {
+    ext.outputFile = file("$projectDir/local.txt")
+    outputs.file(outputFile)
+    doLast {
+        byte[] buf = new byte[20]
+        new Random().nextBytes(buf)
+        outputFile.bytes = buf
+    }
+}
+
+compileJava {
+    inputs.files(tasks.generateLocalUniqueValue).withPropertyName('uniqueValue')
+
+    // simulates a long compile time
+    doLast {
+        sleep 5000
+    }
+}
+
+mainClassName = 'Hello'

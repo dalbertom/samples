@@ -1,0 +1,12 @@
+plugins {
+    id 'com.gradle.build-scan' version '1.9'
+}
+
+buildScan {
+    server = 'https://enterprise-training.gradle.com'
+    publishAlways()
+}
+
+subprojects {
+    apply from: "$rootProject.projectDir/common-settings.gradle"
+}

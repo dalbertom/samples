@@ -1,0 +1,39 @@
+plugins {
+    id 'com.gradle.build-scan' version '1.9'
+    id 'java'
+}
+
+buildScan {
+    server = 'https://enterprise-training.gradle.com'
+    publishAlways()
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
+
+// This registers a task listener with gradle that keeps track of whether any of the tasks that executed
+// were test tasks
+def testTaskListener = new TaskExecutionAdapter() {
+    boolean ranTests = false
+    void afterExecute(Task task, TaskState taskState) {
+        if (task instanceof Test) {
+            ranTests = true
+        }
+    }
+}
+gradle.taskGraph.addTaskExecutionListener(testTaskListener)
+
+buildScan.buildFinished {
+    // this block executes after the build has finished but before the build scan is uploaded to the server
+
+    if (testTaskListener.ranTests) {
+        buildScan.tag('RAN_TESTS')
+    } else {
+        buildScan.tag('NO_TESTS')
+    }
+}

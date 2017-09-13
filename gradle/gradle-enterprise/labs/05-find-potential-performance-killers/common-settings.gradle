@@ -1,0 +1,5 @@
+apply plugin: com.example.plugin.NameEnforcerPlugin
+
+apply from: "$rootProject.projectDir/java-settings.gradle"
+
+version = '1.0'

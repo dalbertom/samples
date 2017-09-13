@@ -1,0 +1,8 @@
+rootProject.name = '06-increase-the-cacheability-of-the-build'
+
+buildCache {
+    local {
+        enabled = true
+        push = true
+    }
+}

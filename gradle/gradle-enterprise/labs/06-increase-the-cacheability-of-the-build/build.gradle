@@ -1,0 +1,33 @@
+plugins {
+    id 'com.gradle.build-scan' version '1.9'
+    id 'base'
+}
+
+buildScan {
+    server = 'https://enterprise-training.gradle.com'
+    publishAlways()
+}
+
+tasks.create('task1', CustomTask) {
+    tasks.build.dependsOn it
+}
+
+// @CacheableTask
+class CustomTask extends DefaultTask {
+
+    @Input
+    String text = "$name\n"
+
+    // @OutputDirectory
+    File outputDir = new File(this.project.buildDir, name)
+
+    @TaskAction
+    void writeFile() {
+        // this just simulates a task that takes some time to execute
+        Thread.sleep(1000 + new Random().nextInt(1000))
+
+        outputDir.mkdirs()
+        new File(outputDir, "output.txt").text = text
+    }
+}
+

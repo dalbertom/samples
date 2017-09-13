@@ -1,0 +1,5 @@
+apply from: "$rootProject.projectDir/java-settings.gradle"
+
+dependencies {
+    compile 'com.google.guava:guava:18.0'
+}

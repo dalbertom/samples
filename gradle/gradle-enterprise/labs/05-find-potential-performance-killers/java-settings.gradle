@@ -1,0 +1,9 @@
+apply plugin: 'java'
+
+// TODO remember to remove this before I commit!!
+Thread.sleep(2000)
+
+repositories {
+    jcenter()
+}
+

@@ -1,0 +1,4 @@
+rootProject.name = '05-find-potential-performance-killers'
+
+include 'app'
+include 'lib'
