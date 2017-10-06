@@ -16,6 +16,10 @@ long_string = ('long '
              'string')
 print(long_string)
 
+# Raw Strings
+print('hello\nworld')
+print(r'hello\nworld')
+
 # Common String Methods in Python
 print("axbxcx".count('x'))
 print("axbxcx".find("x"))
