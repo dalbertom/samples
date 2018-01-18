@@ -28,3 +28,9 @@ Auto mount in /etc/fstab
 ```
 <server-ip-address>:/path/tos/share /path/to/mount nfs auto 0 0
 ```
+
+## openssl
+Check certificate expiration time
+```
+openssl x509 -in wildcard.crt -noout -text -subject | less
+```
