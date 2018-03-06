@@ -36,7 +36,12 @@ openssl x509 -in wildcard.crt -noout -text -subject | less
 ```
 
 ## bash
+
+### recall history
 You can use `fc` to recall and edit previous commands
-`fc` will open an editor with the last command
-`fc -l` will show the commands
-`fc <number>` will edit the specified command
+* `fc` will open an editor with the last command
+* `fc -l` will show the commands
+* `fc <number>` will edit the specified command
+
+Using history command
+* to print a n old command: ![line-number]:p
