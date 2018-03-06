@@ -34,3 +34,9 @@ Check certificate expiration time
 ```
 openssl x509 -in wildcard.crt -noout -text -subject | less
 ```
+
+## bash
+You can use `fc` to recall and edit previous commands
+`fc` will open an editor with the last command
+`fc -l` will show the commands
+`fc <number>` will edit the specified command
