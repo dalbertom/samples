@@ -23,3 +23,25 @@ new XmlNodePrinter(new PrintWriter(System.out)).print(xml)
 //     <sub-sub-element11 att2="attribute2"/>
 //   </sub-element1>
 // </top-element>
+
+
+// MarkupBuilder
+def xml = new XmlParser().parse(file(xmlReport))
+def xmlFile = xml.file
+def xmlOutput = new MarkupBuilder(new PrintWriter(System.out))
+
+xmlOutput.suppressions {
+  xmlFile.each { e ->
+    def source = e.error.@source
+    def file = e.@name
+    p.sourceSets*.allSource.srcDirs.flatten().each { srcDir ->
+      def srcDirStr = srcDir as String
+      if (file.startsWith(srcDirStr)) {
+        file = file.substring(srcDirStr.length() + 1).replaceAll(/[\/\\]/, '.')
+      }
+    }
+    source.collect { it.substring(it.lastIndexOf('.') + 1) }.unique().each {
+      suppress(files: file, checks: it)
+    }
+  }
+
