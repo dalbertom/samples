@@ -59,3 +59,131 @@ kubectl scale --replicas=1 rc/helloworld-controller
 kubectl get pods
 kubectl delete rc/helloworld-controller
 kubectl get pods
+
+## Deployment
+kubectl get deployments
+kubectl get rs # replica sets
+kubectl get pods --show-labels
+kubectl rollout status deployment/helloworld-deployment
+kubectl set image deployment/hello-world-deployment k8s-demo=k8s-demo:2
+kubectl edit deployment/helloworld-deployment
+kubectl rollout history deployment/helloworld-deployment
+kubectl rollout undo deployment/helloworld-deployment --to-revision=n
+
+Deployment Objects are preferred over replica sets and replication controllers
+
+## Services
+`kubectl expose` creates a new service for the pod so it can be accessed externally
+Endpoints:
+* ClusterIP: virtual IP only reachable from within cluster (default)
+* NodePort: port that is same on each node and is reachable externally
+* LoadBalancer: created by cloud provider
+
+By default, service can only run between ports 30000-32767, but can be overridden via the --service-node-port-range= argument to kube-apiserver (in the init scripts)
+
+## Node Labels
+`kubectl label nodes node1 hardware=high-spec`
+```
+nodeSelector:
+  hardware: high-spec
+```
+
+`kubectl get nodes --show-labels`
+kubectl get pods
+kubectl describe pod
+
+
+## Health checks
+Two types of health checks:
+* Run a command periodically
+* Periodic checks on a URL (HTTP)
+
+```
+livenessProbe:
+  httpGet:
+    path: /
+    port: 3000
+  initialDelaySeconds: 15
+  timeoutSeconds: 30
+```
+
+kubectl edit deployment/helloworld-deployment
+
+## Secrets
+To generate secrets using files:
+```
+$ echo -n "root" > ./username.txt
+$ echo -n "password" > ./password.txt
+$ kubectl create secret generic db-user-pass --from-file=./username.txt --from-file=./password.txt
+```
+
+Can also be an SSH key or SSL certificate
+```
+$ kubectl create secret generic ssl-certificate --from-file=ssh-privatekey=~/.ssh/id_rsa --ssl-cer-=sshl-cert=mysslcert.crt
+```
+
+Using yaml definitions
+```
+kind: Secret
+data:
+  password: cm9vdA== (base64)
+  username: cGFzc3dvcmQ= (base64)
+```
+
+Create a pod that exposes secrets as environment variables
+```
+kind: Pod
+spec:
+  containers:
+    env:
+      - name: SECRET_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: db-secret
+            key: username
+      - name: SECRET_PASSWORD
+```
+
+Provide secrets in a file
+```
+kind: Pod
+spec:
+  containers:
+  - name: k8s-demo
+    volumeMounts:
+      - name: credvolume
+        mountPath: /etc/creds
+        readOnly: true
+  volumes:
+  - name: credvolume
+    secret:
+      secretName: db-secrets
+```
+
+kubectl create -f deployment/helloworld-secrets.yml
+kubectl get secrets
+kubectl create -f deployment/helloworld-secrets-volumes.yml
+kubectl get pods
+kubectl describe pod helloworld-deployment-6d4c6b79d9-68t6t
+kubectl exec helloworld-deployment-6d4c6b79d9-68t6t -i -t -- /bin/bash
+> cat /etc/creds/username
+> cat /etc/creds/password
+
+## Web UI
+$ minikube dashboard
+$ minikube dashboard --url
+
+## Service Discovery
+* The DNS service can be used within pods to find other services running on the same cluster
+* Multiple containers within 1 pod do not need this service, they can contact each other directly via localhost:port
+
+## Using ConfigMap
+```
+env:
+  - name: DRIVER
+    valueFrom:
+      configMapKeyRef:
+        name: app-config
+        key: driver
+  - name: DATABASE
+```
