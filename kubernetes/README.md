@@ -33,7 +33,14 @@ You must be running Helm 2.8.2. You are currently on Helm 2.9.1.
 `kubectl label pods <pod> mylabel=awesome` add a new label to a pod
 `kubectl run -i --tty busybox --image=busybox --restart=Never -- sh` run a shell in a pod - very useful for debugging
 
-# Example first-app
+# Switch contexts
+kubectl config get-contexts
+kubectl config use-context minikube
+
+# Tutorial
+git clone https://github.com/wardviaene/kubernetes-course
+
+## Example first-app
 kubectl create -f first-app/helloworld.yml
 kubectl get pod
 kubectl describe pod nodehelloworld.example.com
@@ -42,6 +49,13 @@ kubectl port-forward nodehelloworld.example.com 8081:3000
 kubectl expose pod nodehelloworld.example.com --type=NodePort --name nodehelloworld-service
 minikube service nodehelloworld-service --url
 
-# Switch contexts
-kubectl config get-contexts
-kubectl config use-context minikube
+## Replication Controller
+kubectl create -f kubernetes-course/replication-controller/helloworld-repl-controller.yml
+kubectl get pods
+kubectl scale --replicas=4 -f kubernetes-course/replication-controller/helloworld-repl-controller.yml
+kubectl get pods
+kubectl get rc
+kubectl scale --replicas=1 rc/helloworld-controller
+kubectl get pods
+kubectl delete rc/helloworld-controller
+kubectl get pods
