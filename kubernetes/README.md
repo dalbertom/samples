@@ -187,3 +187,23 @@ env:
         key: driver
   - name: DATABASE
 ```
+```
+kubectl create configmap nginx-config --from-file=configmap/reverseproxy.conf
+kubectl get configmap
+kubectl get configmap nginx-config -o yaml
+kubectl create -f configmap/nginx.yml
+kubectl create -f configmap/nginx-service.yml
+minikube service helloworld-nginx-service --url
+```
+
+## Ingress
+```
+kubectl create -f ingress/ingress.yml
+kubectl create -f ingress/nginx-ingress-controller.yml
+kubectl create -f ingress/echoservice.yml
+kubectl create -f ingress/helloworld-v1.yml
+kubectl create -f ingress/helloworld-v2.yml
+```
+
+## Volumes
+
