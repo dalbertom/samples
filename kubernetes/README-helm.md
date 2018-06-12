@@ -6,6 +6,11 @@ https://docs.helm.sh/using_helm/#quickstart
 $ brew install kubernetes-helm
 ```
 
+To install version 2.7.2
+```console
+$ brew install https://github.com/Homebrew/homebrew-core/raw/607a5f63620b8ca1ba169222874827f00e4f77de/Formula/kubernetes-helm.rb
+```
+
 # Concepts
 * Chart: a helm package, like a Homebrew formula
 * Repository: where helm charts are collected
