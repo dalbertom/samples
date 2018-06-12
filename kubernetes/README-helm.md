@@ -35,5 +35,42 @@ Inspect
 $ helm inspect stable/mariadb
 ```
 
-# Install
+# Initialize
+```console
+$ helm init
+# To upgrade:
+$ helm init --upgrade
+```
 
+## Install an example chart
+```console
+$ helm repo update
+$ helm install stable/mysql
+```
+
+### Inspect
+```console
+$ helm inspect stable/mysql
+```
+
+### List
+```console
+$ helm ls
+$ helm list
+```
+
+## Uninstall a release
+```console
+$ helm delete <name>
+```
+
+## Status
+```console
+$ helm status <name>
+```
+
+## History and Rollback
+```console
+$ helm history <name>
+$ helm rollback <name>
+```
