@@ -8,6 +8,7 @@ $ brew install kubernetes-helm
 
 To install version 2.7.2
 ```console
+$ brew log kubernetes-helm
 $ brew install https://github.com/Homebrew/homebrew-core/raw/607a5f63620b8ca1ba169222874827f00e4f77de/Formula/kubernetes-helm.rb
 ```
 
