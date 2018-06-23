@@ -45,3 +45,9 @@ You can use `fc` to recall and edit previous commands
 
 Using history command
 * to print a n old command: ![line-number]:p
+
+## Hardware troubleshooting
+`lsmod` - show status of modules in the Linux Kernel
+`lshw` - list hardware
+`lshw -C network`
+`lspci` - list all PCI devices
