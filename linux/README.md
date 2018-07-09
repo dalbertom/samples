@@ -51,3 +51,9 @@ Using history command
 `lshw` - list hardware
 `lshw -C network`
 `lspci` - list all PCI devices
+
+### xargs
+Run stuff in parallel with xargs, e.g.
+```
+cat /tmp/todo | grep -v -f /tmp/done | xargs -n 2 -P 16 sh -c 'if [ 0 -ne $(curl -s --netrc-optional $1/consoleText | grep -c "Unable to instantiate") ]; then echo "$0 $1"; fi; echo $1 >> /tmp/done' | tee -a /tmp/output
+```
