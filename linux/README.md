@@ -69,3 +69,5 @@ GPG does not have enough entropy
 This happens when trying to create a gpg key inside a VM
 Install rng-tools: `sudo apt-get install rng-tools`
 Then run `sudo rngd -r /dev/urandom` before generating key.
+
+cat /proc/sys/kernel/random/entropy_avail
