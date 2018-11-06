@@ -63,3 +63,9 @@ Fix issue with "Host key verification failed"
 ```
 ssh-keyscan -H -t rsa hostname  >> ~/.ssh/known_hosts
 ```
+
+## gnupg gpg
+GPG does not have enough entropy
+This happens when trying to create a gpg key inside a VM
+Install rng-tools: `sudo apt-get install rng-tools`
+Then run `sudo rngd -r /dev/urandom` before generating key.
