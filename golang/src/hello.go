@@ -74,6 +74,15 @@ func main() {
   p := person{name: "Jake", age: 23}
   fmt.Println(p)
   fmt.Println(p.age)
+
+  j := 7
+  inc(&j)
+  fmt.Println(j)
+  fmt.Println(&j)
+}
+
+func inc(x *int) {
+  *x++
 }
 
 func sum0(x int, y int) int {
