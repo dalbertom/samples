@@ -30,4 +30,11 @@ func main() {
   c := []int{1, 2, 3, 4}
   c = append(c, 13)
   fmt.Println(c)
+
+  vertices := make(map[string]int)
+  vertices["triangle"] = 2
+  vertices["square"] = 3
+  vertices["dodecagon"] = 12
+  delete(vertices, "square")
+  fmt.Println(vertices)
 }
