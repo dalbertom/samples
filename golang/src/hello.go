@@ -24,4 +24,10 @@ func main() {
   fmt.Println(a)
   b := [5]int{5, 4, 3, 2, 1}
   fmt.Println(b)
+  // Slices are an abstraction on top of arrays
+  // to make it easier to work with, e.g.
+  // they do not have a fixed number of elements.
+  c := []int{1, 2, 3, 4}
+  c = append(c, 13)
+  fmt.Println(c)
 }
