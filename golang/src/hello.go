@@ -1,7 +1,9 @@
 package main
 
 import (
+  "errors"
   "fmt"
+  "math"
 )
 
 func main() {
@@ -59,10 +61,25 @@ func main() {
     fmt.Println("key", key, "value", value)
   }
 
-  result := sum(2, 3)
-  fmt.Println(result)
+  result0 := sum0(2, 3)
+  fmt.Println(result0)
+
+  result, err := sqrt(9)
+  if err != nil {
+    fmt.Println(err)
+  } else {
+    fmt.Println(result)
+  }
 }
 
-func sum(x int, y int) int {
+func sum0(x int, y int) int {
   return x + y
+}
+
+func sqrt(x float64) (float64, error) {
+  if x < 0 {
+    return 0, errors.New("Undefined for negative numbers")
+  }
+
+  return math.Sqrt(x), nil
 }
