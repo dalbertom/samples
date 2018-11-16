@@ -70,6 +70,10 @@ func main() {
   } else {
     fmt.Println(result)
   }
+
+  p := person{name: "Jake", age: 23}
+  fmt.Println(p)
+  fmt.Println(p.age)
 }
 
 func sum0(x int, y int) int {
@@ -82,4 +86,9 @@ func sqrt(x float64) (float64, error) {
   }
 
   return math.Sqrt(x), nil
+}
+
+type person struct {
+  name string
+  age int
 }
