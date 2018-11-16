@@ -37,4 +37,14 @@ func main() {
   vertices["dodecagon"] = 12
   delete(vertices, "square")
   fmt.Println(vertices)
+
+  for i := 0; i < 5; i++ {
+    fmt.Println(i)
+  }
+
+  i := 0
+  for i < 5 { // there is no while loop, but this works
+    fmt.Println(i)
+    i++
+  }
 }
