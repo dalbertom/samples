@@ -18,4 +18,8 @@ func main() {
   } else {
     fmt.Println("Neither more than 6 nor less than 2")
   }
+
+  var a [5]int
+  a[2] = 7
+  fmt.Println(a)
 }
