@@ -18,4 +18,12 @@ letters = ['a', 'b', 'c', 'd']
 length = len(letters) # length = 4
 print(length)
 
+lst = [ 1, 2, 3, 4, 5 ]
+print([ 10+x for x in lst ])
+# 11, 12, 13, 14, 15
+print([ 10+x for x in lst if x < 3 ])
+# 11, 12
+print([ 10+x if x < 3 else 100+x for x in lst ])
+# 11, 12, 103, 104, 105
+
 # fibonacci.py
