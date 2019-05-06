@@ -71,3 +71,49 @@ Install rng-tools: `sudo apt-get install rng-tools`
 Then run `sudo rngd -r /dev/urandom` before generating key.
 
 cat /proc/sys/kernel/random/entropy_avail
+
+## iptables
+
+https://www.howtogeek.com/177621/the-beginners-guide-to-iptables-the-linux-firewall/
+
+Three different chains:
+* input: controls behavior of incoming connections
+* forward: used for incoming connections that are not delivered locally. Used for routing or NATing
+* output: used for outgoing connections
+
+To accept connections by default:
+```
+iptables --policy INPUT ACCEPT
+iptables --policy OUTPUT ACCEPT
+iptables --policy FORWARD ACCEPT
+```
+
+To deny all connections, use DROP instead of ACCEPT
+
+### Connection-specific responses
+* Accept: Allow the connection
+* Drop: Act like it never happened. Best if you don't want the source to realize your system exists
+* Reject: Don't allow, but send back error.
+
+### Allowing or Blocking Specific Connections
+iptables -A appends rule at the end of the chain
+iptables -I inserts rule at the beginning of the chain
+#### Examples
+Block connections from IP: `iptables -A INPUT -s 10.10.10.10 -j DROP`
+Block connections from range: `iptables -A INPUT -s 10.10.10.0/24 -j DROP` or `iptables -A INPUT -s 10.10.10.0/255.255.255.0 -j DROP`
+Block connections to a specific port: `iptables -A INPUT -p tcp --dport ssh -s 10.10.10.10 -j DROP`
+
+### Connection States
+Allow ssh connections from 10.10.10.10 but disallow connections to 10.10.10.10
+```
+iptables -A INPUT -p tcp --dport ssh -s 10.10.10.10 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -p tcp --sport 22 -d 10.10.10.10 -m state --state ESTABLISHED -j ACCEPT
+```
+
+### Save changes
+* Ubuntu: `sudo /sbin/iptables-save`
+* RedHat/CentOS: `/sbin/service iptables save` or `/etc/init.d/iptables save`
+
+### Other commands:
+* List: `iptables -L`
+* Flush (clear all rules): `iptables -F`
