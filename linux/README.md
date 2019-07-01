@@ -39,7 +39,7 @@ Encrypt a file using public ssh rsa key
 https://superuser.com/questions/576506/how-to-use-ssh-rsa-public-key-to-encrypt-a-text
 ```
 ssh-keygen -f ~/.ssh/id_rsa.pub -e -m PKCS8 > id_rsa.pem.pub
-openssl rsautl -encrypt -pubin -inkey id_rsa.pem.pub -ssl -in myMessage.txt -out myEncryptedMessage.txt
+openssl rsautl -encrypt -pubin -inkey id_rsa.pem.pub -in myMessage.txt -out myEncryptedMessage.txt
 openssl rsautl -decrypt -inkey ~/.ssh/id_rsa -in myEncryptedMessage.txt -out myDecryptedMessage.txt
 ```
 
