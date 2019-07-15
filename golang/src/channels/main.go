@@ -1,7 +1,10 @@
 package main
 
-import "fmt"
-import "net/http"
+import (
+	"fmt"
+	"net/http"
+	"time"
+)
 
 func main() {
 	links := []string{
@@ -29,5 +32,6 @@ func checkLink(link string, c chan string) {
 	} else {
 		fmt.Println(link, "is up")
 	}
+	time.Sleep(5 * time.Second)
 	c <- link
 }
