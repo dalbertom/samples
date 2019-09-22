@@ -1,0 +1,7 @@
+#!/usr/bin/ruby
+
+# vim: set ft=ruby
+
+(10..15).each do |n|
+  print n, ' '
+end
