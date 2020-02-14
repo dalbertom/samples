@@ -21,7 +21,7 @@ http://www.tutorialspoint.com/ruby/
 * if
 * in
 * module
-* enxt
+* next
 * nil
 * not
 * or
