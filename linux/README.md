@@ -43,6 +43,14 @@ openssl rsautl -encrypt -pubin -inkey id_rsa.pem.pub -in myMessage.txt -out myEn
 openssl rsautl -decrypt -inkey ~/.ssh/id_rsa -in myEncryptedMessage.txt -out myDecryptedMessage.txt
 ```
 
+self-sign a certificate
+https://serverfault.com/questions/224122/what-is-crt-and-key-files-and-how-to-generate-them
+```
+openssl genrsa 2048 > host.key
+chmod 400 host.key
+openssl req -new -x509 -nodes -sha256 -days 365 -key host.key -out host.cert
+```
+
 ## bash
 
 ### recall history
