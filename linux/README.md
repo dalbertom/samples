@@ -1,3 +1,57 @@
+# Sat May  2 08:31:16 EDT 2020 [How to compile and install Linux Kernel 5.6.9 from source code](https://www.cyberciti.biz/tips/compiling-linux-kernel-26.html)
+
+1. Grab latest kernel from kernel.org
+```
+wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.6.9.tar.xz
+unxz -v linux-5.6.9.tar.xz
+```
+1. Verify kernel
+```
+wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.6.9.tar.sign
+gpg --verify linux-5.6.9.tar.sign
+gpg --recv-keys 647F28654894E3BD457199BE38DBBDC86092693E
+gpg --verify linux-5.6.9.tar.sign
+```
+1. Untar the kernel tarball
+```
+tar xvf linux-5.6.9.tar
+```
+1. Copy existing Linux kernel config
+```
+cd linux-5.6.9
+cp -v /boot/config-$(uname -r) .config
+```
+1. Install required compilers and other tools
+```
+sudo apt-get install -y build-essential libncurses-dev bison flex libssl-dev libelf-dev
+#sudo yum group install "Development Tools"
+#sudo yum install ncurses-devel bison flex elfutils-libelf-devel openssl-devel
+```
+1. Configuring the kernel
+```
+make menuconfig
+# make xconfig
+# make gconfig
+```
+1. Compile the kernel
+```
+make -j $(nproc)
+```
+1. Install the Linux kernel modules
+```
+sudo make modules_install
+```
+1. Install the Linux kernel
+```
+sudo make install
+```
+1. Update grub config
+```
+# These commands are optional as make install does everything but included for historical reasons
+sudo update-initramfs -c -k 5.6.9
+sudo update-grub
+```
+
 # Useful Linux Commands
 
 ## Create new file system and mount the device
