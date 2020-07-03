@@ -116,6 +116,10 @@ You can use `fc` to recall and edit previous commands
 Using history command
 * to print a n old command: ![line-number]:p
 
+### variable expansion
+Unset environment variables that start with a prefix
+`unset ${!DOCKER*}`
+
 ## Hardware troubleshooting
 `lsmod` - show status of modules in the Linux Kernel
 `lshw` - list hardware
