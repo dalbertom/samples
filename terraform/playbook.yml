@@ -1,18 +1,31 @@
 - hosts: all
-  become: yes
   vars:
     ansible_python_interpreter: /usr/bin/python3
   tasks:
   - package:
       name: 
+      - ntpdate
       - python3-pip
       - unzip
+    become: yes
+ #- command: ntpdate ntp.ubuntu.com
+ #  become: yes
   - file:
       state: directory
       path: ~/bin
-    become: no
   - unarchive:
       dest: ~/bin
       remote_src: yes
       src: https://releases.hashicorp.com/terraform/0.12.28/terraform_0.12.28_linux_amd64.zip
-    become: no
+  - pip:
+      name:
+        - awscli
+        - awsebcli
+  - git:
+      name: https://github.com/wardviaene/devops-box
+      dest: ~/devops-box
+      update: no
+  - git:
+      name: https://github.com/wardviaene/terraform-course
+      dest: ~/terraform-course
+      update: no
