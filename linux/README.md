@@ -83,6 +83,24 @@ Auto mount in /etc/fstab
 <server-ip-address>:/path/tos/share /path/to/mount nfs auto 0 0
 ```
 
+## Resize encrypted partition
+
+growpart /dev/nvme1n1 1
+lsblk
+```
+NAME        MAJ:MIN RM  SIZE RO TYPE  MOUNTPOINT
+nvme0n1     259:2    0   20G  0 disk
+└─nvme0n1p1 259:3    0   20G  0 part  /
+nvme1n1     259:0    0  100G  0 disk
+└─crypt1    253:1    0  100G  0 crypt /vol/crypt1
+nvme2n1     259:1    0   10G  0 disk
+└─tmp       253:0    0   10G  0 crypt /mnt
+```
+
+cryptsetup resize crypt1
+xfs_growfs /dev/mapper/crypt1
+
+
 ## openssl
 Check certificate expiration time
 ```
@@ -191,3 +209,5 @@ iptables -A OUTPUT -p tcp --sport 22 -d 10.10.10.10 -m state --state ESTABLISHED
 ### Other commands:
 * List: `iptables -L`
 * Flush (clear all rules): `iptables -F`
+
+
