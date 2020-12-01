@@ -1,0 +1,28 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+DOCKER_VERSION = "17.05.0"
+DOCKER_COMPOSE_VERSION="1.14.0"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "bento/ubuntu-20.04"
+  config.vm.provision "shell", inline: <<-SCRIPT
+    wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+    sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
+        /etc/apt/sources.list.d/jenkins.list'
+    sudo apt-get update
+    sudo apt-get install -y openjdk-8-jdk
+    sudo apt-get install -y jenkins
+  SCRIPT
+
+  for i in 2..4 do
+    config.vm.define "jenkins#{i}" do |jk|
+      jk.vm.hostname = "jenkins#{i}"
+      jk.vm.network "private_network", ip: "192.168.5.#{i}"
+      #jk.vm.network "public_network", bridge: "en0: Wi-Fi (Wireless)"
+      #jk.vm.network "forwarded_port", guest: 8080, host: 8080 + i
+    end
+  end
+
+end
