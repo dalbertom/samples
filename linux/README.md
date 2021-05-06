@@ -138,6 +138,22 @@ Using history command
 Unset environment variables that start with a prefix
 `unset ${!DOCKER*}`
 
+### file descriptors
+https://gitlab.appian-stratus.com/appian/dev/stratus-amplify/-/blob/bashlog/bashlog#L52-55
+```
+# create dynamic file descriptor, store the value in variable INFO, be a copy of stdout &1, and inherit write mode (write vs append)
+exec {INFO}>&1
+# create dynamic file descriptor, store value in variable DEBUG, append to file $DEBUG_FILE
+exec {DEBUG}>> $DEBUG_FILE
+
+echo hello >&$INFO
+echo world >&$DEBUG
+
+# close file descriptors
+exec {INFO}>&-
+exec {DEBUG}>&-
+```
+
 ## Hardware troubleshooting
 `lsmod` - show status of modules in the Linux Kernel
 `lshw` - list hardware

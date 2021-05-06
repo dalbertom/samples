@@ -3,4 +3,6 @@ hostpath
 *.vdi
 .DS_Store
 .fseventsd/
+*.pdf
 *.swp
+*.zip

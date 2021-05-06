@@ -29,3 +29,9 @@ After creating the logical volumes, they can be used as block devices. To be abl
 mkfs.ext4 /dev/my_volume_group/3gig
 mount -t ext4 /dev/my_volume_group/3gig /mnt
 ```
+
+# Other
+update label
+```
+e2label /dev/data-ci96/data-ci96 data-ci96
+```
