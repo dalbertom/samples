@@ -226,4 +226,6 @@ iptables -A OUTPUT -p tcp --sport 22 -d 10.10.10.10 -m state --state ESTABLISHED
 * List: `iptables -L`
 * Flush (clear all rules): `iptables -F`
 
-
+## wget
+wget --random-wait -drc
+wget --random-wait --debug --recursive --continue
