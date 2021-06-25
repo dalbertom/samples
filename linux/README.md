@@ -244,3 +244,30 @@ vim /etc/tor/torrc
 ## wget
 wget --random-wait -drc
 wget --random-wait --debug --recursive --continue
+
+# Performance
+https://www.youtube.com/watch?v=FJW8nGV4jxY&list=PLhhdIMVi0o5RNrf8E2dUijvGpqKLB9TCR
+Linux Performance Tools, Brendan Gregg
+
+## Basic
+top
+iotop
+iostat -xmdz 1
+mpstat -P ALL 1
+free -m
+sar -n DEV 1 #network IO
+strace
+vmstat
+
+## Intermediate
+strace -tttT -p $pid
+tcpdump -i eth0 -w /tmp/out.tcpdump
+netstat
+nicstat
+pidstat -t 1 # threads
+pidstat -d 1 # disk i/o
+swapon -s
+lsof -iTCP -sTCP:ESTABLISHED
+sar (and collectl, dstat, etc) # System Activity Reporter
+sar -n TCP,ETCP,DEV 1
+atop
