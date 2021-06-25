@@ -226,6 +226,21 @@ iptables -A OUTPUT -p tcp --sport 22 -d 10.10.10.10 -m state --state ESTABLISHED
 * List: `iptables -L`
 * Flush (clear all rules): `iptables -F`
 
+## tor (wip)
+sudo apt install tor
+cd /etc/tor
+cat torrc
+cat torsocks.conf
+
+sudo service tor status
+sudo su
+vim /etc/tor/torrc
+vim /var/lib/tor/
+vim /etc/nginx/nginx.conf
+vim /var/www/html/index.html
+vim /etc/tor/torrc
+
+
 ## wget
 wget --random-wait -drc
 wget --random-wait --debug --recursive --continue
