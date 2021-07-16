@@ -244,6 +244,7 @@ vim /etc/tor/torrc
 ## wget
 wget --random-wait -drc
 wget --random-wait --debug --recursive --continue
+wget -A '*2021-07*' -r # useful to download files named after specific dates
 
 # Performance
 https://www.youtube.com/watch?v=FJW8nGV4jxY&list=PLhhdIMVi0o5RNrf8E2dUijvGpqKLB9TCR
