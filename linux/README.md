@@ -271,3 +271,45 @@ lsof -iTCP -sTCP:ESTABLISHED
 sar (and collectl, dstat, etc) # System Activity Reporter
 sar -n TCP,ETCP,DEV 1
 atop
+
+# Networking
+
+## Linux Network Namespaces with ip netns
+https://youtu.be/iN2RnYaFn-0
+
+### Create namespace
+ip netns add net1
+
+### List namespaces
+ip netns
+
+### Execute command in namesepace
+ip netns exec net1 ip link
+ip netns exec net1 ip addr
+
+### Bring up lo
+ip netns exec net1 ip link set dev lo up
+ip netns exec net1 ip link
+ip netns exec net1 ping -c 1 127.1
+
+### Add veth to global namespace
+ip link add veth0 type veth peer name veth1
+
+### Link it to namespace
+ip link set veth1 netns net1
+ip netns exec net1 ip link
+
+### Bring up veth1, give it an IP address
+ip netns exec net1 ip link set dev veth1 up
+ip netns exec net1 ip addr add 10.0.0.2/24 dev veth1
+ip netns exec net1 ip link
+
+### Bring up veth0, give it an IP address
+ip link set veth0 up
+ip a a 10.0.0.1/24 dev veth0
+
+### Ping ip in namespace
+ping 10.0.0.2
+
+### Delete namespace
+ip netns del net1
