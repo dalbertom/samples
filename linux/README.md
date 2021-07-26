@@ -273,10 +273,22 @@ sar (and collectl, dstat, etc) # System Activity Reporter
 sar -n TCP,ETCP,DEV 1
 atop
 
+# Mail
+## view messages in mail queue
+```
+mailq
+```
+## drop messages in mail queue
+```
+sudo postsuper -d ALL
+```
+
 # Networking
 
 ## Linux Network Namespaces with ip netns
 https://youtu.be/iN2RnYaFn-0
+https://blog.scottlowe.org/2013/09/04/introducing-linux-network-namespaces/
+https://www.inf.usi.ch/faculty/carzaniga/edu/adv-ntw/mininet.pdf
 
 ### Create namespace
 ip netns add net1
@@ -314,3 +326,4 @@ ping 10.0.0.2
 
 ### Delete namespace
 ip netns del net1
+
