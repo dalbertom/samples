@@ -35,3 +35,13 @@ update label
 ```
 e2label /dev/data-ci96/data-ci96 data-ci96
 ```
+
+# Shrink volume https://wiki.archlinux.org/title/Resizing_LVM-on-LUKS
+lvresize -L 26516m /dev/usb-vg/root
+pvdisplay # (Allocated PE * PE Size + not usable) * 1024 * 1024
+pvresize --setphysicalvolumesize 27786215424B /dev/mapper/usb
+pvs -v --segments /dev/mapper/usb
+pvmove --alloc anywhere /dev/mapper/usb:14561-14804
+pvdisplay
+cryptsetup status /dev/mapper/usb # (Allocated PE + unusable extents) * 4 MiB/extent / sector size
+cryptsetup resize --size 54272000 /dev/mapper/usb
