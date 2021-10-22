@@ -138,6 +138,11 @@ Using history command
 Unset environment variables that start with a prefix
 `unset ${!DOCKER*}`
 
+lowercase: ${VARIABLE,,}
+uppercase: ${VARIABLE^^}
+switch case: ${VARIABLE~~}
+search-and-replace: ${VARIABLE//./_}
+
 ### file descriptors
 https://gitlab.appian-stratus.com/appian/dev/stratus-amplify/-/blob/bashlog/bashlog#L52-55
 ```
