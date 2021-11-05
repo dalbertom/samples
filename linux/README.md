@@ -185,6 +185,15 @@ Then run `sudo rngd -r /dev/urandom` before generating key.
 
 cat /proc/sys/kernel/random/entropy_avail
 
+### sign a file
+gpg --armor --output file.txt.sig --sign file.txt
+
+### create a detached signature
+gpg --armor --detach-sign file.txt # will create file.txt.asc
+
+### verify signature
+gpg --verify file.txt.asc
+
 ## iptables
 
 https://www.howtogeek.com/177621/the-beginners-guide-to-iptables-the-linux-firewall/
