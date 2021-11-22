@@ -134,6 +134,16 @@ You can use `fc` to recall and edit previous commands
 Using history command
 * to print a n old command: ![line-number]:p
 
+#### substitute previous command
+echo world
+!! !$
+^world^hello
+!-2
+^world^hello^:&
+!!:gs/hello/world
+fc -s world=hello
+fc -l
+
 ### variable expansion
 Unset environment variables that start with a prefix
 `unset ${!DOCKER*}`
@@ -146,15 +156,15 @@ search-and-replace: ${VARIABLE//./_}
 ### file descriptors
 https://gitlab.appian-stratus.com/appian/dev/stratus-amplify/-/blob/bashlog/bashlog#L52-55
 ```
-# create dynamic file descriptor, store the value in variable INFO, be a copy of stdout &1, and inherit write mode (write vs append)
+#### create dynamic file descriptor, store the value in variable INFO, be a copy of stdout &1, and inherit write mode (write vs append)
 exec {INFO}>&1
-# create dynamic file descriptor, store value in variable DEBUG, append to file $DEBUG_FILE
+#### create dynamic file descriptor, store value in variable DEBUG, append to file $DEBUG_FILE
 exec {DEBUG}>> $DEBUG_FILE
 
 echo hello >&$INFO
 echo world >&$DEBUG
 
-# close file descriptors
+#### close file descriptors
 exec {INFO}>&-
 exec {DEBUG}>&-
 ```
