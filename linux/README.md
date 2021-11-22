@@ -124,7 +124,6 @@ openssl req -new -x509 -nodes -sha256 -days 365 -key host.key -out host.cert
 ```
 
 ## bash
-
 ### recall history
 You can use `fc` to recall and edit previous commands
 * `fc` will open an editor with the last command
