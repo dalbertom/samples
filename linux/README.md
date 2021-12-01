@@ -168,6 +168,9 @@ exec {INFO}>&-
 exec {DEBUG}>&-
 ```
 
+### bash debugging tips
+https://wiki.bash-hackers.org/scripting/debuggingtips
+
 ## Hardware troubleshooting
 `lsmod` - show status of modules in the Linux Kernel
 `lshw` - list hardware
