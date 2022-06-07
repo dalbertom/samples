@@ -277,7 +277,7 @@ https://www.digitalocean.com/community/tutorials/how-to-find-broken-links-on-you
 
 ```
 wget --spider -r -nd -nv -H -l 1 -w 2 -o run1.log  http://your_server_ip/spiderdemo.html
-wget --spider -r -nd -nv -l 5 -o /tmp/run.log https://docs.appian.com/suite/help/22.2/
+time caffeinate -d wget --spider -r -nd -nv -l 6 -o /tmp/run2.log https://docs.appian.com/suite/help/22.2/
 ```
 
 # Performance
