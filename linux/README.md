@@ -272,6 +272,14 @@ wget --random-wait -drc
 wget --random-wait --debug --recursive --continue
 wget -A '*2021-07*' -r # useful to download files named after specific dates
 
+### How To Find Broken Links on Your Website
+https://www.digitalocean.com/community/tutorials/how-to-find-broken-links-on-your-website-using-wget-on-debian-7
+
+```
+wget --spider -r -nd -nv -H -l 1 -w 2 -o run1.log  http://your_server_ip/spiderdemo.html
+wget --spider -r -nd -nv -l 5 -o /tmp/run.log https://docs.appian.com/suite/help/22.2/
+```
+
 # Performance
 https://www.youtube.com/watch?v=FJW8nGV4jxY&list=PLhhdIMVi0o5RNrf8E2dUijvGpqKLB9TCR
 Linux Performance Tools, Brendan Gregg
