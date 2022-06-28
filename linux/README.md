@@ -271,6 +271,7 @@ vim /etc/tor/torrc
 wget --random-wait -drc
 wget --random-wait --debug --recursive --continue
 wget -A '*2021-07*' -r # useful to download files named after specific dates
+wget -A '*2022-06-27*' -A '*2022-06-28*' -r --compression=gzip # download files after two specific dates, compressed
 
 ### How To Find Broken Links on Your Website
 https://www.digitalocean.com/community/tutorials/how-to-find-broken-links-on-your-website-using-wget-on-debian-7
