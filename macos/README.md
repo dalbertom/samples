@@ -12,3 +12,37 @@ syslog -w -k Sender Docker
 * fs_usage
 * opensnoop
 * iosnoop
+
+## Networking
+
+https://apple.stackexchange.com/questions/24066/how-to-simulate-slow-internet-connections-on-the-mac
+
+Comment from ubershmekel:
+Mac OS X 10.10+ users need to use dnctl and pfctl but documented usage examples aren't easy to find.
+
+```
+# Configure `pfctl` to use `customRule`. 
+(cat /etc/pf.conf && echo "dummynet-anchor \"customRule\"" && echo "anchor \"customRule\"") | sudo pfctl -f -
+
+# Define `customRule` to pipe traffic to `pipe 1`.
+# Note this is the actual port definition, not a textual comment
+echo "dummynet in quick proto tcp from any to any port 443 pipe 1" | sudo pfctl -a customRule -f -
+
+# Define what `pipe 1` should do to traffic
+sudo dnctl pipe 1 config delay 10000
+sudo dnctl pipe 1 config bw 10Kbit/s
+
+# DO NOT FORGET to undo these when you're done
+sudo dnctl -q flush
+sudo pfctl -f /etc/pf.conf
+````
+If you want to go all out and shape everything you can use:
+
+```
+echo "dummynet in quick proto tcp from any to any pipe 1" | sudo pfctl -a customRule -f -
+```
+I believe this also affects localhost pipes which slowed down my vs-code debugging, so be mindful of that.
+
+### man pages
+https://www.manpagez.com/man/8/dnctl/
+https://www.manpagez.com/man/8/pfctl/
