@@ -14,3 +14,32 @@ From: https://itnext.io/profiling-jvm-applications-remotely-using-visualvm-c0df9
   java -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=1089 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false Main
 
 1. /Applications/VisualVM.app/Contents/Resources/visualvm/bin/visualvm -J-DsocksProxyHost=localhost -J-DsocksProxyPort=9696
+
+# Memory usage
+
+From: http://www.openkb.info/2014/06/how-to-check-java-memory-usage.html
+
+`jps` to find process
+
+1. ps and pmap can show total reserved memory from OS.
+```
+ps auwx|egrep "MEM|2304"|grep -v grep
+pmap -x 2304
+```
+
+2. jmap and jstat can show used space of heap&stack.
+```
+jmap -heap 2304|egrep ":|used     ="
+```
+
+```
+jstat -gc 2304
+```
+New Generation(used memory) = S0U+S1U+EU
+concurrent mark-sweep generation(used memory) = OU
+Perm Generation(used memory)=PU.
+
+3. jmap -histo can show top heap memory objects
+```
+jmap -histo -F 2304 | less
+```
