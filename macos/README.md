@@ -98,3 +98,8 @@ pfctl -d
 pfctl -a customRule -F info
 pfctl -F info
 ```
+
+## Fri Oct 21 22:21:41 PDT 2022 Object file displaying tool
+```
+otool -L /opt/homebrew/bin/bash
+```
