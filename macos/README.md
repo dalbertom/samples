@@ -15,6 +15,39 @@ syslog -w -k Sender Docker
 
 ## Networking
 
+### Routing
+
+#### See route table
+netstat -rn -f inet
+
+#### See route table for a host
+route -n get ssm.us-east-1.amazonaws.com
+
+#### Update route table to go through VPN tunnel
+sudo route add -host ssm.us-east-1.amazonaws.com -interface utun3
+sudo route delete -host ssm.us-east-1.amazonaws.com
+
+#### Monitor route table changes
+route monitor
+
+### Performance testing
+networkQuality -v
+
+```
+brew install iperf3
+```
+
+Server
+```
+iperf3 -s -p 5201
+```
+
+Client
+```
+iperf3 -c 192.168.x.y -p 5201 -t 20
+```
+
+### Performance simulation
 https://apple.stackexchange.com/questions/24066/how-to-simulate-slow-internet-connections-on-the-mac
 
 Comment from ubershmekel:
@@ -35,7 +68,7 @@ sudo dnctl pipe 1 config bw 10Kbit/s
 # DO NOT FORGET to undo these when you're done
 sudo dnctl -q flush
 sudo pfctl -f /etc/pf.conf
-````
+```
 If you want to go all out and shape everything you can use:
 
 ```
@@ -55,7 +88,7 @@ https://blog.leiy.me/post/bw-throttling-on-mac/
 
 ```
 pfctl -e
-(cat /etc/pf.conf - <<EOF
+(cat /etc/pf.conf - << EOF
 dummynet-anchor customRule
 anchor customRule
 EOF
@@ -66,7 +99,7 @@ dnctl pipe 1 config bw 50KByte/s delay 500
 
 ### Filter communication bidirectionally
 ```
-pfctl -a customRule -f - <<EOF
+pfctl -a customRule -f - << EOF
 dummynet in quick proto tcp from any port 443 to any pipe 1
 dummynet out quick proto tcp from any to any port 443 pipe 1
 EOF
@@ -74,7 +107,7 @@ EOF
 
 #### Can use hostname, but not as effective? perhaps bulk of transfer happens elsewhere
 ```
-pfctl -a customRule -f - <<EOF
+pfctl -a customRule -f - << EOF
 dummynet out quick proto tcp from any to artifacts.eng.appianci.net port 443 pipe 1
 dummynet out quick proto tcp from artifacts.eng.appianci.net port 443 to any pipe 1
 EOF
