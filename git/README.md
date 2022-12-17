@@ -23,5 +23,5 @@ git fsck --name-objects
 ## if git fsck shows broken link
 use this to fetch all missing objects
 ```
-git fetch-pack
+git fetch-pack --refetch --all $(git config --get remote.origin.url)
 ```
