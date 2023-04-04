@@ -252,6 +252,12 @@ iptables -A OUTPUT -p tcp --sport 22 -d 10.10.10.10 -m state --state ESTABLISHED
 * List: `iptables -L`
 * Flush (clear all rules): `iptables -F`
 
+## sed
+https://edoras.sdsu.edu/doc/sed-oneliners.html
+
+### duplicate lines except first and last
+seq 2017 2023 | sed '1,$p;1d;$d' | xargs -n 2
+
 ## tor (wip)
 sudo apt install tor
 cd /etc/tor
