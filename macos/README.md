@@ -30,6 +30,11 @@ sudo route delete -host ssm.us-east-1.amazonaws.com
 #### Monitor route table changes
 route monitor
 
+#### Show state of interfaces
+netstat -i
+
+ifconfig -X utun
+
 ### Performance testing
 networkQuality -v
 
