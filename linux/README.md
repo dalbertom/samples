@@ -133,6 +133,20 @@ You can use `fc` to recall and edit previous commands
 Using history command
 * to print a n old command: ![line-number]:p
 
+### reassess HISTSIZE and HISTFILESIZE
+
+Get history timestamps into human readable form
+```
+cd ~/.bash_history.d
+time awk -F '#' '/^#/ {system("date -j -f %s +%Y-%m-%d_%H:%M:%S " $2)}' ttys0* > /tmp/histdates.txt
+#awk -F '#' '/^#/ {system("gdate +%Y-%m-%d_%H:%M:%S --date @" $2)}' ttys0*
+```
+
+Remove duplicates, tally by day
+```
+sort -u /tmp/histdates.txt | cut -d _ -f 1 | uniq -c | sort -n
+```
+
 #### substitute previous command
 echo world
 !! !$
