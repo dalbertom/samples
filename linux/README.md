@@ -140,6 +140,7 @@ Get history timestamps into human readable form
 cd ~/.bash_history.d
 time awk -F '#' '/^#/ {system("date -j -f %s +%Y-%m-%d_%H:%M:%S " $2)}' ttys0* > /tmp/histdates.txt
 #awk -F '#' '/^#/ {system("gdate +%Y-%m-%d_%H:%M:%S --date @" $2)}' ttys0*
+#time awk -F '#' '/^#/ {cmd="date -j -f %s +%Y-%m-%d_%H:%M:%S " $2; cmd | getline; close(cmd); print FILENAME, $0}' ttys0* > /tmp/histdates2.txt
 ```
 
 Remove duplicates, tally by day
