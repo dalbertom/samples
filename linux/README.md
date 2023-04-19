@@ -146,6 +146,7 @@ time awk -F '#' '/^#/ {system("date -j -f %s +%Y-%m-%d_%H:%M:%S " $2)}' ttys0* >
 Remove duplicates, tally by day
 ```
 sort -u /tmp/histdates.txt | cut -d _ -f 1 | uniq -c | sort -n
+#cat /tmp/histdates2.txt | awk '{ arr[$2]=$1 } END { for (k in arr) print arr[k], k }' | cut -d _ -f 1 | sort | uniq -c | sort -n
 ```
 
 #### substitute previous command
