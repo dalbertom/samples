@@ -274,6 +274,38 @@ https://edoras.sdsu.edu/doc/sed-oneliners.html
 ### duplicate lines except first and last
 seq 2017 2023 | sed '1,$p;1d;$d' | xargs -n 2
 
+## time
+time is both a keyword and an external command. The external command accepts `-o` and `-a` to save the output (or append) to a file. To force the invocation of the external command, use `command time`, e.g.
+
+```
+command time -o /tmp/time.txt sleep 5
+command time -a -o /tmp/time.txt sleep 5
+```
+
+or via env
+```
+env time ...
+```
+
+also overriding format can be useful, but prefer an alias for it
+```
+shopt -s expand_aliases # if writing a script
+alias time="command time --format='%e,%U,%S,%P'"
+git fetch origin b2a766f08e90c54b01405851344c9086a667ae73
+git checkout FETCH_HEAD
+test -d ../baseline || git worktree add -d ../baseline @^{/"Merge pull"}
+pushd ../baseline
+time -o /tmp/before-time.txt ./gradlew --rerun-tasks assemble > /tmp/before.txt 2>&1
+popd
+time -o /tmp/after-time.txt ./gradlew --rerun-tasks assemble > /tmp/after.txt 2>&1
+for i in {1..10}; do
+	pushd ../baseline
+	time -a -o /tmp/before-time.txt ./gradlew --rerun-tasks assemble >> /tmp/before.txt 2>&1
+	popd
+	time -a -o /tmp/after-time.txt ./gradlew --rerun-tasks assemble >> /tmp/after.txt 2>&1
+done
+```
+
 ## tor (wip)
 sudo apt install tor
 cd /etc/tor
