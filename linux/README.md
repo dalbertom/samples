@@ -289,8 +289,9 @@ env time ...
 
 also overriding format can be useful, but prefer an alias for it
 ```
-shopt -s expand_aliases # if writing a script
-alias time="command time --format='%e,%U,%S,%P'"
+shopt -s expand_aliases
+
+alias time="command time --format='%e,%U,%S'"
 git fetch origin b2a766f08e90c54b01405851344c9086a667ae73
 git checkout FETCH_HEAD
 test -d ../baseline || git worktree add -d ../baseline @^{/"Merge pull"}
@@ -299,11 +300,15 @@ time -o /tmp/before-time.txt ./gradlew --rerun-tasks assemble > /tmp/before.txt 
 popd
 time -o /tmp/after-time.txt ./gradlew --rerun-tasks assemble > /tmp/after.txt 2>&1
 for i in {1..10}; do
-	pushd ../baseline
-	time -a -o /tmp/before-time.txt ./gradlew --rerun-tasks assemble >> /tmp/before.txt 2>&1
-	popd
-	time -a -o /tmp/after-time.txt ./gradlew --rerun-tasks assemble >> /tmp/after.txt 2>&1
+        pushd ../baseline
+        time -a -o /tmp/before-time.txt ./gradlew --rerun-tasks assemble >> /tmp/before.txt 2>&1
+        popd
+        time -a -o /tmp/after-time.txt ./gradlew --rerun-tasks assemble >> /tmp/after.txt 2>&1
 done
+
+alias xsv='docker run --rm -i cincan/xsv'
+cat <(echo real,user,system) /tmp/before-time.txt | xsv stats --everything | xsv select field,min,median,max,stddev | xsv table
+cat <(echo real,user,system) /tmp/after-time.txt | xsv stats --everything | xsv select field,min,median,max,stddev | xsv table
 ```
 
 ## tor (wip)
