@@ -62,3 +62,8 @@ fi
 sleep 5
 done
 ```
+
+Do a thread dump using jcmd
+```
+jcmd $(pgrep java) Thread.print > td.log
+```
