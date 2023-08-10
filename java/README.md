@@ -43,3 +43,22 @@ Perm Generation(used memory)=PU.
 ```
 jmap -histo -F 2304 | less
 ```
+
+# https://medium.com/zaloni-engineering/troubleshooting-high-cpu-and-memory-leaks-in-java-processes-fa962775351d
+```
+set -u
+pid=$(pgrep java)
+for i in {1..600}; do
+read -r load1m load5m <<<$(uptime | grep -oE 'load average: .*' | cut -d : -f 2 | tr '.' ',' | cut -d , -f 1,3 | tr ',' ' ')
+if [ $load1m -ge $load5m ]; then
+        date >> all.log
+        top -n 1 -b -H -p $pid | tr -s ' ' | awk '{ printf("0x%x %s\n", $1, $0) }' | sed -n '8,13p' > top5.log
+        cat top5.log >> all.log
+        jstack $pid > jstack.log
+        for i in $(awk '{print "/nid=" $1 "/,/^$/p"}' top5.log); do
+                sed -n $i jstack.log >> all.log
+        done
+fi
+sleep 5
+done
+```
