@@ -341,31 +341,75 @@ time caffeinate -d wget --spider -r -nd -nv -l 6 -o /tmp/run2.log https://docs.a
 ```
 
 # Performance
-https://www.youtube.com/watch?v=FJW8nGV4jxY&list=PLhhdIMVi0o5RNrf8E2dUijvGpqKLB9TCR
 Linux Performance Tools, Brendan Gregg
+Part 1: https://www.youtube.com/watch?v=FJW8nGV4jxY&list=PLhhdIMVi0o5RNrf8E2dUijvGpqKLB9TCR
+Part 2: https://www.youtube.com/watch?v=zrr2nUln9Kk&list=PLhhdIMVi0o5RNrf8E2dUijvGpqKLB9TCR
+
+## Packages
+sysstat, procps, coreutils
+
+## Methodologies
+For every resource, check
+1. Utilization: busy time
+2. Saturation: queue length or queued time
+3. Errors
+https://www.brendangregg.com/USEmethod/use-linux.html
 
 ## Basic
+
+### Process
 top
-iotop
-iostat -xmdz 1
-mpstat -P ALL 1
+top -H # show threads (good for java applications)
+top -n 1 -b -H -p $(pgrep java) | tr -s ' ' | awk '{ printf("0x%x %s\n", $1, $0) }' > top.log
+jstack $(pgrep java) > jstack.log
+jmap -dump:live,format=b,file=heap.bin $(pgrep java)
+
+mpstat -P ALL 1 # look for unbalanced workloads, hot CPUs
+
+### Memory
 free -m
+vmstat -Sm 1 # unit mb
+
+### Disk I/O
+iostat -xmz 1 # extended statistics, megabytes per second, omit output of devices with no activity
+
+sudo iotop
+sudo iotop -a # --accumulated
+
+### Network
 sar -n DEV 1 #network IO
-strace
-vmstat
+netstat
 
 ## Intermediate
-strace -tttT -p $pid
-tcpdump -i eth0 -w /tmp/out.tcpdump
-netstat
-nicstat
+
+### Process
 pidstat -t 1 # threads
 pidstat -d 1 # disk i/o
+
+strace -tttT -p $pid
+
+### Memory
 swapon -s
+
+### Network
+tcpdump -i eth0 -w /tmp/out.tcpdump
+tcpdump -nr /tmp/out.tcpdump | head
+
+netstat -s # statistics
+nicstat # based on iostat
+
 lsof -iTCP -sTCP:ESTABLISHED
-sar (and collectl, dstat, etc) # System Activity Reporter
 sar -n TCP,ETCP,DEV 1
+
 atop
+
+## Advanced
+ss -mop
+iptraf # histogram of network packet sizes
+slabtop # kernel slab allocator memory
+pcstat # show page cache residency by file, useful for database performance analysis
+perf_events
+tiptop
 
 # Mail
 ## view messages in mail queue
