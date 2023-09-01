@@ -10,6 +10,9 @@ syslog -w -k Sender Docker
 
 ## File system usage
 * fs_usage
+```
+sudo fs_usage -w | grep falcon >> /tmp/falconOutput.log & sleep 60; kill $!
+```
 * opensnoop
 * iosnoop
 
