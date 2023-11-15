@@ -1,15 +1,9 @@
 # Docs
-https://docs.helm.sh/using_helm/#quickstart
+Helm v3.13.0
 
 # Setup
 ```console
-$ brew install kubernetes-helm
-```
-
-To install version 2.7.2
-```console
-$ brew log kubernetes-helm
-$ brew install https://github.com/Homebrew/homebrew-core/raw/607a5f63620b8ca1ba169222874827f00e4f77de/Formula/kubernetes-helm.rb
+$ brew install helm
 ```
 
 # Concepts
@@ -17,60 +11,84 @@ $ brew install https://github.com/Homebrew/homebrew-core/raw/607a5f63620b8ca1ba1
 * Repository: where helm charts are collected
 * Release: instance of a chart running in a cluster
 
+# https://helm.sh/docs/intro/quickstart/
+
+## Initialize a Helm Chart Repository
+Check [Artifact Hub](https://artifacthub.io/packages/search) for available Helm chart repositories
+```
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm search repo bitnami
+```
+
+## Install an Example Chart
+```
+helm repo update
+helm install bitnami/mysql --generate-name
+```
+
+## Learn about Releases
+```
+helm list
+helm status mysql-1700006295
+```
+
+## Uninstall a Release
+```
+helm uninstall mysql-1700006295
+helm uninstall --keep-history mysql-1700006295
+```
 
 # Search
 
-Show all available charts.
-```console
-$ helm search
+```
+helm search hub # searches Artifact Hub
+helm search repo # searches repositories that were added (local operation)
 ```
 
-Find a specific chart.
-```console
-$ helm search mysql
+```
+helm search hub wordpress
+helm repo add brigade https://brigadecore.github.io/charts
+helm search repo brigade
 ```
 
-Inspect
-```console
-$ helm inspect stable/mariadb
+# Install
 ```
-
-# Initialize
-```console
-$ helm init
-# To upgrade:
-$ helm init --upgrade
-```
-
-## Install an example chart
-```console
-$ helm repo update
-$ helm install stable/mysql
-```
-
-### Inspect
-```console
-$ helm inspect stable/mysql
-```
-
-### List
-```console
-$ helm ls
-$ helm list
-```
-
-## Uninstall a release
-```console
-$ helm delete <name>
+helm install happy-panda bitnami/wordpress
 ```
 
 ## Status
 ```console
-$ helm status <name>
+$ helm status happy-panda
+```
+
+## Customizing the Chart before installing
+```console
+$ helm show values bitnami/wordpress > values.yaml
+# edit values.yaml
+$ helm install -f values.yaml bitnami/wordpress happy-panda
+# edit values.yaml
+$ helm upgrade -f values.yaml happy-panda bitnami/wordpress
+$ helm get values happy-panda
 ```
 
 ## History and Rollback
 ```console
-$ helm history <name>
-$ helm rollback <name>
+$ helm history happy-panda
+$ helm rollback happy-panda 1
+```
+
+## Uninstall
+```console
+$ helm uninstall happy-panda
+$ helm uninstall --keep-history happy-panda
+$ helm list --uninstalled
+$ helm list --all
+```
+
+# Create your own charts
+```console
+$ helm create deis-workflow
+$ helm lint
+$ helm package deis-workflow
+$ helm install deis-workflow ./deis-workflow-0.1.0.tgz
 ```
