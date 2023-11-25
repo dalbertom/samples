@@ -382,4 +382,51 @@ f { a = 1; b = 2; c = 3; }
 ```
 
 ### Function libraries
-In addition to the [built-in operators](https://nixos.org/manual/nix/stable/language/operators.html)
+In addition to the [built-in operators](https://nixos.org/manual/nix/stable/language/operators.html) there are two widely used libraries.
+
+#### builtins
+Also known as "primitive operations" or "primops"
+
+```
+builtins.toString
+```
+
+#### import
+`import` takes a path to a Nix file, reads it to evaluate the contained Nix expression, and returns the resulting value. If the path points to a directory, the file `default.nix` in that directory is used instead.
+
+```
+import ./file.nix
+```
+
+#### pkgs.lib
+The `nixpkgs` repository contains an attribute set called `lib`, which provides a large number of useful functions
+
+```
+let
+  pkgs = import <nixpkgs> {};
+in
+pkgs.lib.strings.toUpper "search paths considered harmful"
+```
+
+### Impurities
+One impurity in the Nix language that is relevant: reading files from the file system as _build inputs_
+Build inputs are files that derivations refer to in order to describe how to derive new files.
+When run, a derivation will only have access to explicitly declared build inputs.
+The only way to specify build inputs in the Nix language is explicitly with:
+* File system paths
+* Dedicated functions
+
+### Paths
+Whenever a file system path is used in string interpolation, the contents of that file are copied to a special location in the file system, the _Nix store_, as a side effect.
+The evaluated string the contains the Nix store path assigned to that file.
+
+### Fetchers
+Files to be used as build inputs do not have to come from the file system
+The Nix language provides built-in impure functions to fetch files over the network during evaluation:
+* builtins.fetchUrl
+* builtins.fetchTarball
+* builtins.fetchGit
+* builtins.fetchClosure
+They evaluate to a file system path in the Nix store.
+
+### Derivations
