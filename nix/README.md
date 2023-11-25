@@ -300,3 +300,86 @@ in [ f a ]
 
 #### Multiple arguments
 Also known as "curried functions"
+
+```
+x: y: x + y
+```
+The above function is equivalent to
+```
+x: (y: x + y)
+```
+
+Example
+```
+let
+  f = x: y: x + y;
+in
+f 1
+```
+```
+let
+  f = x: y: x + y;
+in
+f 1 2
+```
+
+#### Attribute set argument
+Also known as "keyword arguments" or "destructuring"
+Nix functions can be declared to require an attribute set with specific structure as argument.
+This is denoted by listing the expected attribute names separated by commas and enclosed in braces
+Example:
+```
+let
+  f = { a, b }: a + b;
+in
+f { a = 1; b = 2; }
+```
+
+Counter-example: Error: called with unexpected argument 'c'
+```
+let
+  f = { a, b }: a + b;
+in
+f { a = 1; b = 2; c = 3; }
+```
+
+#### Default values
+Also known as "default arguments"
+Example:
+```
+let
+  f = {a, b ? 0}: a + b;
+in
+f { a = 1; }
+```
+
+#### Additional attributes
+Example:
+```
+let
+  f = {a, b, ...}: a + b;
+in
+f { a = 1; b = 2; c = 3; }
+```
+
+#### Named attribute set argument
+Also known as "@ pattern", "@ syntax", or "'at' syntax"
+An attribute set argument can be given a name to be accessible as a whole.
+This is denoted by prepending or appending the name to the attribute set argument, separated by the at sign.
+Example
+```
+{ a, b, ...}@args: a + b + args.c
+```
+or
+```
+args@{a, b, ...}: a + b + args.c
+```
+```
+let
+  f = { a, b, ...}@args: a + b + args.c;
+in
+f { a = 1; b = 2; c = 3; }
+```
+
+### Function libraries
+In addition to the [built-in operators](https://nixos.org/manual/nix/stable/language/operators.html)
