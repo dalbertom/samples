@@ -207,3 +207,29 @@ kubectl create -f ingress/helloworld-v2.yml
 
 ## Volumes
 
+## Resize Persistent Volume Claims
+```
+helm uninstall david-keydb
+kubectl delete pvc keydb-data-david-keydb-0
+
+helm install david-keydb sxt-charts-central/keydb
+kubectl exec -ti david-keydb-0 -- df -h /data
+kubectl edit pvc keydb-data-david-keydb-0 # update storage
+kubectl scale sts david-keydb --replicas=0
+# kubectl delete sts --cascade=orphan david-keydb # not really needed
+helm upgrade david-keydb sxt-charts-central/keydb
+# helm upgrade david-keydb sxt-charts-central/keydb --set persistentVolume.size=4Gi
+```
+
+### Alternative, not needed either
+```
+helm install david-keydb sxt-charts-central/keydb
+kubectl exec -ti david-keydb-0 -- df -h /data
+kubectl edit pvc keydb-data-david-keydb-0 # update storage
+kubectl get sts -oyaml david-keydb > /tmp/sts.yaml
+vim /tmp/sts.yaml
+kubectl scale sts david-keydb --replicas=0
+kubectl delete sts --cascade=orphan david-keydb # not really needed
+kubectl apply -f /tmp/sts.yaml
+kubectl rollout restart sts david-keydb
+```
