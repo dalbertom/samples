@@ -150,9 +150,51 @@ tour/numeric-constants.go
 * Are high-precision _values_
 * An untyped constants takes the type needed by its context
 
----
-
 ### Flow control statements: for, if, else, switch and defer
+
+#### For
+
+tour/for.go
+* This is the only looping construct
+* three components, separated by semicolons: init statement, condition expression, post statement
+
+Note: unlike languages like C, Java or JavaScript, there are no parenthesis surrounding the three components of the `for` statement and the braces `{ }` are always required.
+
+* The init and post statements are optional
+tour/for-continued.go
+
+* At that point you can drop the semicolons: C's `while` is spelled `for` in Go.
+tour/for-is-gos-while.go
+
+* If you omit the loop condition it loops forever
+tour/forever.go
+
+#### If
+Similar to `for` in the sense that the expression need not be surrounded by parenthesis `( )` but the braces `{ }` are required.
+tour/if.go
+
+##### If with a short statement
+tour/if-with-a-short-statement.go
+* Like `for`, the `if` statement can start with a short statement to execute before the condition.
+* Variables declared by the statement are only in scope until the end of the `if`.
+
+##### If and else
+* Variables declared inside an `if` short statement are also available inside any of the `else` blocks.
+tour/if-and-else.go
+
+##### Exercise: Loops and Functions
+tour/exercise-loops-and-functions.go
+
+#### Switch
+* Similar to the one in C, C++, Java, JavaScript, PHP, except that Go does not have a fall-through.
+* Also, cases don't need to be constants, and values don't need to be integers
+tour/switch.go
+
+##### Switch evaluation order
+* They evaluate top to bottom, stopping when a case succeeds
+tour/switch-evaluation-order.go
+
+---
 
 ### More types: structs, slices, and maps
 
