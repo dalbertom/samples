@@ -194,10 +194,169 @@ tour/switch.go
 * They evaluate top to bottom, stopping when a case succeeds
 tour/switch-evaluation-order.go
 
----
+##### Switch with no condition
+* It's the same as `switch true`.
+* Can be a clean way to write long if-then-else chains
+tour/switch-with-no-condition.go
+
+#### Defer
+* Defers the execution of a function until the surrounding function returns.
+* The call's arguments are evaluated immediately, but the function call is not executed until the surrounding function returns.
+tour/defer.go
+
+##### Stacking defers
+* Deferred function calls are pushed onto a stack.
+* When a function returns, its deferred calls are executed in last-in-first-out order
+tour/defer-multi.go
 
 ### More types: structs, slices, and maps
 
+#### Pointers
+tour/pointers.go
+* The type `*T` is a pointer to a `T` value. Its zero value is `nil`.
+* The `&` operator generates a pointer to its operand.
+* The `*` operator denotes the pointer's underlying value. This is known as "dereferencing" or "indirecting"
+* Unlike C, Go has no pointer arithmetic.
+
+#### Structs
+* It's a collection of fields.  tour/structs.go
+* Struct fields are accessed using a dot. tour/struct-fields.go
+
+##### Pointer to structs
+* Struct fields can be accessed through a struct pointer.
+* To access the field `X` of a struct when we have the struct pointer `p` we could write `(*p).X`. But that notation is cumbersome, so the language permits `p.X` without the explicit dereference.
+tour/struct-pointers.go
+
+##### Struct Literals
+tour/struct-literals.go
+* Denotes a newly allocated struct value by listing the values of its fields.
+* You can list a subset of fields by using the `Name:` syntax (and the order of named fields is irrelevant).
+* The special prefix `&` returns a pointer to the struct value.
+
+#### Arrays
+tour/array.go
+* The type `[n]T` is an array of `n` values of type `T`.
+* The expression `var a [10]int` declares a variable `a` as an array of ten integers.
+
+#### Slices
+tour/slices.go
+* An array has a fixed size. A slice is a dynamically-sized, flexible view into the elements of an array.
+* In practice, slices are much more common than arrays
+* The type `[]T` is a slice with elements of type `T`
+* A slice is formed by specifying two indices, a low and high bound, separated by a colon: `a[low : high]`
+
+##### Slices are like references to arrays
+tour/slice-pointers.go
+* A slice does not store any data, it just describes a section of an underlying array.
+* Changing the elements of a slice modifies the corresponding elements of its underlying array.
+* Other slices that share the same underlying array will see those changes.
+
+##### Slice literals
+tour/slice-literals.go
+* A slice literal is like an array literal without the length.
+* This is an array literal: `[3]bool{true, true, false}`
+* This creates the same array, then builds a slice that references it: `[]bool{true, true, false}`
+
+##### Slice defaults
+tour/slice-bounds.go
+* When slicing, you may omit the high or low bounds to use their defaults instead.
+* The default is zero for the low bound and the length of the slice for the high bound.
+
+For the array `var a [10]int` these slice expressions are equivalent:
+```
+a[0:10]
+a[:10]
+a[0:]
+a[:]
+```
+
+##### Slice length and capacity
+tour/slice-len-cap.go
+* A slice has both a _length_ and a _capacity_.
+* The length is the number of elements it contains.
+* The capacity is the number of elements in the underlying array, counting from the first element in the slice.
+* The length and capacity of a slice `s` can be obtained via `len(s)` and `cap(s)`.
+* You can extend a slice's length by re-slicing it, provided it has sufficient capacity.
+
+##### Nil slices
+tour/nil-slices.go
+* The zero value of a slice is `nil`.
+* A nil slice has a length and capacity of 0 and has no underlying array.
+
+##### Creating a slice with make
+tour/making-slices.go
+* Slices can be created with the built-in `make` function; this is how you create dynamically-sized arrays.
+* The `make` function allocates a zeroed array and returns a slice that refers to that array:
+```
+a := make([]int, 5) // len(a)=5
+```
+* To specify a capacity, pass a third argument to `make`:
+```
+b := make([]int, 0, 5) // len(b)=0, cap(b)=5
+b = b[:cap(b)] // len(b)=5, cap(b)=5
+b = b[1:] // len(b)=4, cap(b)=4
+```
+
+##### Slices of slices
+tour/slices-of-slice.go
+* Slices can contain any type, including other slices.
+
+##### Appending to a slice
+tour/append.go
+* Go provides a built-in `append` function.
+```
+func append(s []T, vs ...T) []T
+```
+* First parameter is the slice, the rest are values to append to the slice.
+* If the backing array is too small, a bigger one will be allocated.
+
+##### Range
+tour/range.go
+* The `range` form of the `for` loop iterates over a slice or map.
+* When ranging over a slice, two values are returned for each iteration. The first is the index, and the second is a copy of the element at that index.
+
+* You can skip the index or value by assigning to `_`.
+tour/range-continued.go
+```
+for i, _ := range pow
+for _, value := range pow
+```
+
+If you only want the index, you can omit the second variable.
+```
+for i := range pow
+```
+
+##### Exercise: Slices
+tour/exercise-slices.go
+
+#### Maps
+tour/maps.go
+* The zero value of a map is `nil`. A `nil` map has no keys, nor can keys be added.
+* The `make` function returns a map of the given type, initialized and ready for use.
+
+##### Map literals
+tour/map-literals.go
+* They are like struct literals, but the keys are required.
+
+##### Map literal
+tour/map-literals-continued.go
+* If the top-level type is just a type name, you can omit it from the elements of the literal.
+
+##### Mutating Maps
+tour/mutating-maps.go
+* Insert or update an element in map `m`: `m[key] = elem`
+* Retrieve an element: `elem = m[key]`
+* Delete an element: `delete(m, key)`
+* Test that a key is present with a two-value assignment: `elem, ok = m[key]`
+* If `key` is in `m`, `ok` is `true`. If not, `ok` is `false`
+* If `key` is not in the map, then `elem` is the zero value for the map's element type
+* If `elem` or `ok` have not yet been declared you could use a short declaration form: `elem, ok := m[key]`
+
+##### Exercise: Maps
+tour/exercise-maps.go
+
+---
 ## Methods and interfaces
 
 ### Methods and interfaces
