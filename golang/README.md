@@ -356,8 +356,39 @@ tour/mutating-maps.go
 ##### Exercise: Maps
 tour/exercise-maps.go
 
----
+#### Function values
+tour/function-values.go
+* Functions are values, too.
+* Function values may be used as function arguments and return values.
+
+##### Function closures
+tour/function-closures.go
+* A closure is a function value that references variables from outside its body.
+* The function may access and assign to the referenced values; in this sense the function is "bound" to the variables.
+
+##### Exercise: Fibonacci closure
+tour/exercise-fibonacci-closure.go
+
 ## Methods and interfaces
+
+### Methods
+tour/methods.go
+* Go does not have classes, but you can define methods on types
+* A method is a function with a special _receiver_ argument.
+* The receiver appears in its own argument list between the `func` keyword and the method name.
+
+#### Methods are functions
+tour/methods-funcs.go
+* A method is just a function with a receiver argument.
+* Here's `Abs` written as a regular function with no change in functionality.
+
+#### Methods continued
+tour/methods-continued.go
+* You can declare a method on non-struct types, too
+
+#### Pointer receivers
+
+---
 
 ### Methods and interfaces
 
