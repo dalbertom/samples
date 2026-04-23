@@ -387,6 +387,55 @@ tour/methods-continued.go
 * You can declare a method on non-struct types, too
 
 #### Pointer receivers
+tour/methods-pointers.go
+* You can declare methods with pointer receivers.
+* This means the receiver type has the literal syntax `*T` for some type `T`. (Also, `T` cannot itself be a pointer such as `*int`.)
+* Methods with pointer receivers can modify the value to which the receiver points.
+* Pointer receivers are more common than value receivers since methods often need to modify their receiver.
+
+#### Pointers and functions
+tour/methods-pointsers-explained.go
+
+#### Methods and pointer indirection
+tour/indirection.go
+* Functions with a pointer argument must take a pointer.
+```
+var v Vertex
+ScaleFunc(v, 5) // Compile error!
+ScaleFunc(&v, 5) // OK
+```
+
+* Methods with pointer receivers take either a value or a pointer as the receiver
+```
+var v Vertex
+v.Scale(5) // OK
+p := &v
+p.Scale(10) // OK
+```
+* As a convenience, Go interprets the statement `v.Scale(5)` as `(&v).Scale(5)` since the `Scale` method has a pointer receiver.
+
+tour/indirection-values.go
+* The equivalent happens in the reverse direction.
+* Functoins that take a value argument must take the value of that specific type:
+```
+var v Vertex
+fmt.Println(AbsFunc(v)) // OK
+fmt.Println(AbsFunc(&v)) // Compile error!
+```
+
+* while methods with value receivers take either a value or a pointer as the receiver when they are called:
+```
+var v Vertex
+fmt.Println(v.Abs()) // OK
+p := &v
+fmt.Println(p.Abs()) // OK
+```
+* In this case, the method call `p.Abs()` is interpreted as `(*p).Abs()`
+
+#### Choosing a value or pointer receiver
+* There are two reasons to use a pointer receiver
+  1. So that the method can modify the value that its receiver points to.
+  2. To avoid copying the value on each method call. This can be more efficient if the receiver is a large struct.
 
 ---
 
