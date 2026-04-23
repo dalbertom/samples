@@ -433,13 +433,103 @@ fmt.Println(p.Abs()) // OK
 * In this case, the method call `p.Abs()` is interpreted as `(*p).Abs()`
 
 #### Choosing a value or pointer receiver
+tour/methods-with-pointer-receivers.go
 * There are two reasons to use a pointer receiver
   1. So that the method can modify the value that its receiver points to.
   2. To avoid copying the value on each method call. This can be more efficient if the receiver is a large struct.
+* In this example, both `Scale` and `Abs` are methods with receiver type `*Vertex`, even though the `Abs` method does not need to modify its receiver.
+* In general, all methods on a given type should have either value or pointer receivers, but not a mixture of both.
+
+### Interfaces
+tour/interfaces.go
+* An _interface type_ is defined as a set of method signatures.
+* A value of interface type can hold any value that implements those methods.
+
+#### Interfaces are implemented implicitly
+tour/interfaces-are-satisfied-implicitly.go
+* A type implements an interface by implementing its methods.
+* There is no explicit declaration of intent, no "implements" keywords.
+* Implicit interfaces decouple the definition of an interface from its implementation, which could then appear in any package without prearrangement
+
+#### Interface values
+tour/interface-values.go
+* Under the hood, interface values can be thought of as a tuple of a value and a concrete type:
+```
+(value, type)
+```
+* An interface value holds a value of a specific underlying concrete type.
+* Calling a method on an interface value executes the method of the same name on its underlying type.
+
+#### Interface values with nil underlying values
+tour/interface-values-with-nil.go
+* If the concrete value inside the interface itself is nil, the method will be called with a nil receiver.
+* In some languages this would trigger a null pointer exception, but in Go it is common to write methods that gracefully handle being called with a nil receiver (as with the method `M` in the example).
+* Note that an interface value that holds a nil concrete value is itself non-nil.
+
+#### Nil interface values
+tour/nil-interface-values.go
+* A nil interface value holds neither value nor concrete type.
+* Calling a method on a nil interface is a run-time error because there is no type inside the interface tuple to indicate which _concrete_ method to call.
+
+#### The empty interface
+tour/empty-interface.go
+* The interface type that specifies zero methods is known as the _empty interface_:
+```
+interface{}
+```
+* An empty interface may hold values of any type. (Every type implements at least zero methods)
+* Empty interfaces are used by code that handles values of unknown type. For example, `fmt.Print` takes any number of arguments of type `interface{}`.
+
+### Type assertions
+tour/type-assertions.go
+* A _type assertion_ provides access to an interface value's underlying concrete value.
+```
+t := i.(T)
+```
+* This statement asserts that the interface value `i` holds the concrete type `T` and assigns the underlying `T` value to the variable `t`.
+* If `i` does not hold a `T`, the statement will trigger a panic.
+
+* To _test_ whether an interface value holds a specific type, a type assertion can return two values: the underlying value and a boolean value that reports whether the assertion succeeded.
+```
+t, ok := i.(T)
+```
+* If `i` holds a `T`, then `t` will be the underlying value and `ok` will be true.
+* If not, `ok` will be false and `t` will be zer value of type `T`, and no panic occurs.
+* Note the similarity between this syntax and that of reading from a map.
+
+### Type switches
+tour/type-switches.go
+* A _type switch_ is a construct that permits several type assertions in series.
+* A type switch is like a regular switch statement, but the cases in a type switch specify types (not values), and those values are compared against the type of the value held by the given interface value.
+```
+switch v := i.(type) {
+case T:
+    // here v has type T
+case S:
+    // here v has type S
+default:
+    // no match; here v has the same type as i
+}
+```
+* The declaration of a type switch has the same syntax as a type assertion `i.(T)`, but the specific type `T` is replaced with the keyword `type`.
+* This switch statement tests whether the interface value `i` holds a value of type `T` or `S`. In each of the `T` and `S` cases, the variable `v` will be of type `T` or `S` respectively and hold the value held by `i`. In the default case (where there is no match), the variable `v` is of the same interface type and value as `i`.
+
+### Stringers
+tour/stringer.go
+* One of the most ubiquitous interfaces is `Stringer` defined in the `fmt` package.
+```
+type Stringer interface {
+    String() string
+}
+```
+* A `Stringer` is a type that can describe itself as a string. The `fmt` package (and many others) look for this interface to print values.
+
+#### Exercise: Stringers
+tour/exercise-stringer.go
+* Make the `IPAddr` type implement `fmt.Stringer` to print the address as a dotted quad.
+* For instance, `IPAddr{1, 2, 3, 4}` should print as `"1.2.3.4"`
 
 ---
-
-### Methods and interfaces
 
 ## Generics
 
