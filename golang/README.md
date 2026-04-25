@@ -565,12 +565,88 @@ func (e ErrNegativeSqrt) Error() string
 * method such that `ErrNegativeSqrt(-2).Error() returns `"cannot Sqrt negative number: -2"`.
 * **Note:** a call to `fmt.Sprint(e)` inside the `Error` method will send the program into an infinite loop. You can avoid this by converting `e` first: `fmt.Sprint(float64(e))
 
----
+### Readers
+tour/reader.go
+* The `io` package specifies the `io.Reader` interface, which represents the read end of a stream of data.
+* The Go standard library contains [many implementations](https://cs.opensource.google/search?q=Read%5C(%5Cw%2B%5Cs%5C%5B%5C%5Dbyte%5C)&ss=go%2Fgo) of this interface, including files, network connections, compressors, ciphers, and others.
+* The `io.Reader` interface has a `Read` method:
+```
+func (T) Read(b []byte) (n int, err error)
+```
+`Read` populates the given byte slice with data and returns the number of bytes populated and an error value. It returns an `io.EOF` error when the stream ends.
+
+The example code creates a `strings.Reader` and consumes its output 8 bytes at a time.
+
+#### Exercise: Readers
+tour/exercise-reader.go
+* Implement a `Reader` type that emits an infinite stream of the  ASCII character 'A'
+
+#### Exercise: rot13Reader
+tour/exercise-rot-reader.go
+* A common pattern is an `io.Reader` that wraps another `io.Reader`, modifying the stream in some way.
+* For example, the `gzip.NewReader` function takes an `io.Reader` (a stream of compressed data) and returns a `*gzip.Reader` that also implements `io.Reader` (a stream of decompressed data).
+* Implement a `rot13Reader` that implements `io.Reader` and reads from an `io.Reader`, modifying the stream by applying the `rot13` substitution cipher to all alphabetical characters.
+* The `rot13Reader` type is provided for you. Make it an `io.Reader` by implementing its `Read` method.
+
+### Images
+tour/images.go
+[Package Image](https://go.dev/pkg/image/#Image) defines the `Image` interface:
+```
+package image
+type Image interface {
+    ColorModel() color.Model
+    Bounds() Rectangle
+    At(x, y int) color.Color
+}
+```
+
+(See [the documentation](https://go.dev/pkg/image/#Image) for all the details.)
+
+**Note:** the `Rectangle` return value of the `Bounds` method is actually an `image.Rectangle`, as the declaration is inside package `image`.
+The `color.Color` and `color.Model` types are also interfaces, but we'll ignore that by using the predefined implementations `color.RGBA` and `color.RGBAModel`. These interfaces and types are specified by the [image/color package](https://go.dev/pkg/image/color/)
+
+#### Exercise: Images
+tour/exercise-images.go
+* Similar to the previous picture generator, write another one, but this time it will return an implementation of `image.Image` instead of a slice of data.
+* Define your own `Image` type, implement the necessary methods, and call `pic.ShowImage`.
+* `Bounds` should return a `image.Rectangle`, like `iamge.Rect(0, 0, w, h)`.
+* `ColorModel` should return `color.RGBAModel`.
+* `At` should return a color; the value `v` in the last picture generator corresponds to `color.RGBA{v, v, 255, 255}` in this one.
 
 ## Generics
 
-### Generics
+### Type parameters
+tour/index.go
+* Go functions can be written to work on multiple types using type parameters. The type parameters of a function appear between brackets, before the function's arguments.
+```
+func Index[T comparable](s []T, x T) int
+```
+* This declaration means that `s` is a slice of any type `T` that fulfills the built-in constraint `comparable`. `x` is also a value of the same type.
+* `comparable` is a useful constraint that makes it possible to use the `==` and `!=` operators on values of the type.
+* In this example, we use it to compare a value to all slice elements until a match is found. This `Index` function works for any type that supports comparison.
+
+### Generic types
+tour/list.go
+* In addition to generic functions, Go also supports generic types. A type can be parameterized with a type parameter, which could be useful for implementing generic data structures.
+* This example demonstrates a simple type declaration for a singly-linked list holding any type of value.
+* As an exercise, add some functionality to this list implementation.
 
 ## Concurrency
+
+### Goroutines
+tour/goroutines.go
+* A _goroutine_ is a lightweight thread managed by the Go runtime.
+```
+go f(x, y, z)
+```
+* starts a new goroutine running
+```
+f(x, y, z)
+```
+* The evaluation of `f`, `x`, `y`, and `z` happens in the current goroutine and the execution of `f` happens in the new goroutine.
+* Goroutines run in the same address space, so access to shared memory must be synchronized.
+* The `sync` package provides useful primitives, although you won't need them much in Go as there are other primitives.
+
+---
 
 ### Concurrency
