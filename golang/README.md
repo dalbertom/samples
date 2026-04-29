@@ -730,3 +730,20 @@ go Walk(tree.New(1), ch)
 4. Test the `Same` functoin.
 `Same(tree.New(1), tree.New(1))` should return true, and `Same(tree.New(1), tree.New(2))` should return false.
 
+### sync.Mutex
+tour/mutex-counter.go
+* We've seen how channels are great for communication among goroutines.
+* But what if we don't need communication? What if we just want to make sure only one goroutine can access a variable at a time to avoid conflicts?
+* This concept is called _mutual exclusion_, and the conventional name for the data structure that provides it is _mutex_.
+* Go's standard library provides mutual exclusion with `sync.Mutex` as its two methods:
+  * Lock
+  * Unlock
+* We can define a block of code to be executed in mutual exclusion by surrounding it with a call to `Lock` and `Unlock` as shown on the `Inc` method.
+* We can also use `defer` to ensure the mutex will be unlocked as in the `Value` method.
+
+#### Exercise: Web Crawler
+tour/exercise-web-crawler.go
+* In this exercise you'll use Go's concurrency features to parallelize a web browser.
+* Modify the `Crawl` function to fetch URLs in parallel without fetching the same URL twice.
+* _Hint:_ you can keep a cache of the URLs that have been fetched on a map, but maps alone are not safe for concurrent use!
+
